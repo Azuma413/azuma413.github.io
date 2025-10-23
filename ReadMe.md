@@ -1,5 +1,4 @@
-# ホームページ
-
-```
-npm run build
+# デプロイ用ブランチ
+```bash
+.\update.ps1
 ```

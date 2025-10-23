@@ -1,15 +1,17 @@
 import React, { useState, useEffect, FC } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Header: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const navLinks = [
-    { href: '/#about', label: 'About' },
-    { href: '/#projects', label: 'Projects' },
-    { href: '/#skills', label: 'Skills' },
-    { href: '/blog', label: 'Blog' },
-    { href: '/#contact', label: 'Contact' },
+    { href: '/#about', label: 'About', section: 'about' },
+    { href: '/#projects', label: 'Projects', section: 'projects' },
+    { href: '/blog', label: 'Blog', section: null },
+    { href: '/#contact', label: 'Contact', section: 'contact' },
   ];
 
   useEffect(() => {
@@ -20,8 +22,36 @@ const Header: FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, link: typeof navLinks[0]) => {
+    e.preventDefault();
     setIsOpen(false);
+
+    // Blogリンクの場合は通常のナビゲーション
+    if (link.href === '/blog') {
+      navigate('/blog');
+      return;
+    }
+
+    // ホームページのセクションリンクの場合
+    if (link.section) {
+      // 現在Blogページにいる場合は、まずホームに戻る
+      if (location.pathname !== '/') {
+        navigate('/');
+        // ナビゲーション後にスクロール
+        setTimeout(() => {
+          const element = document.getElementById(link.section!);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        // すでにホームページにいる場合は直接スクロール
+        const element = document.getElementById(link.section);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
   };
 
   return (
@@ -40,6 +70,7 @@ const Header: FC = () => {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleLinkClick(e, link)}
                 className="text-slate-300 hover:text-indigo-400 transition-colors duration-200"
               >
                 {link.label}
@@ -79,7 +110,7 @@ const Header: FC = () => {
             <a
               key={link.href}
               href={link.href}
-              onClick={handleLinkClick}
+              onClick={(e) => handleLinkClick(e, link)}
               className="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800"
             >
               {link.label}

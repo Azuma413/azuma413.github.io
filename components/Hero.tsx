@@ -23,14 +23,14 @@ const Hero: FC = () => {
                     AI Researcher & Software Engineer passionate about Robotics, Multimodal Learning, and creating intelligent autonomous systems.
                 </p>
             </AnimatedDiv>
-            <AnimatedDiv delay={400}>
+            {/* <AnimatedDiv delay={400}>
                 <a
                     href="#projects"
                     className="inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
                     View My Work
                 </a>
-            </AnimatedDiv>
+            </AnimatedDiv> */}
         </div>
         
         <style>{`

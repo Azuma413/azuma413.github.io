@@ -15,8 +15,8 @@ const Home: FC = () => (
   <>
     <Hero />
     <About />
-    <Projects />
     <Skills />
+    <Projects />
     <Contact />
   </>
 );

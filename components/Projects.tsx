@@ -17,7 +17,7 @@ Accepted at RSJ 2025. This research proposed a novel method to integrate audio s
 - Demonstrated a 57.4% increase in task success rate on a real-world, audio-dependent pick-and-place task.
 - Validated the approach in both simulation and on a 6-DoF manipulator, leveraging critical auditory cues for success.
 `,
-    imageUrl: 'https://picsum.photos/seed/robotics/600/400',
+    imageUrl: '/images/Fixed_square.jpg',
     tags: ['Imitation Learning', 'Robotics', 'Multimodal', 'PyTorch'],
   },
   {
@@ -32,7 +32,7 @@ As the Software Lead for Kyoto University's NHK Robocon 2024 team, I was respons
 - Designed and implemented a robust, real-time control system with ROS2 for a complex autonomous robot.
 - Successfully managed the software team to meet tight deadlines and deliver a high-performance system for the competition.
 `,
-    imageUrl: 'https://picsum.photos/seed/robocon/600/400',
+    imageUrl: '/images/Fixed_square.jpg',
     tags: ['ROS2', 'C++', 'Real-time Control', 'Robotics'],
   },
   {
@@ -48,7 +48,7 @@ During my internship, I focused on developing and optimizing video generation wo
 - Optimized VQ-VAE and diffusion modules, leading to significant improvements.
 - Awarded "Best Poster" in an internal research presentation for this work.
 `,
-    imageUrl: 'https://picsum.photos/seed/driving/600/400',
+    imageUrl: '/images/Fixed_square.jpg',
     tags: ['Diffusion Models', 'Transformers', 'JAX', 'Autonomous Driving'],
   },
 ];

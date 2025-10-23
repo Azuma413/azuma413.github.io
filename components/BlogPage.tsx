@@ -1,50 +1,39 @@
-import React, { useEffect, FC } from 'react';
+import React, { useEffect, FC, useMemo } from 'react';
 // Fix: Corrected import for react-router-dom.
 import { useParams, Link } from "react-router-dom";
 import type { Post } from '../types';
 import AnimatedDiv from './AnimatedDiv';
 import MarkdownRenderer from './MarkdownRenderer';
 
-const posts: Post[] = [
-    {
-        slug: 'first-post',
-        title: 'Welcome to My Research & Development Blog',
-        date: '2024-07-28',
-        excerpt: 'This is the inaugural post on my new blog. Here, I plan to share insights from my work in AI, robotics, and software engineering.',
-        content: `
-## Welcome to the Journey
+// Viteのimport.meta.globを使ってdocs/内のマークダウンファイルを動的に読み込む
+const markdownFiles = import.meta.glob('../docs/*.md', { eager: true, query: '?raw', import: 'default' });
 
-Hello! I'm excited to launch this blog as a space to document my journey through the fascinating worlds of Artificial Intelligence and Robotics. My goal is to share not just the outcomes of my research and projects, but also the thought processes, challenges, and learnings along the way.
+// マークダウンファイルからタイトルを抽出する関数
+const extractTitle = (content: string): string => {
+  const match = content.match(/^#\s+(.+)$/m);
+  return match ? match[1] : 'Untitled';
+};
 
-### What to Expect
+// ファイルパスからslugを生成する関数
+const getSlugFromPath = (path: string): string => {
+  const match = path.match(/\/([^/]+)\.md$/);
+  return match ? match[1] : '';
+};
 
-- **In-depth Articles:** Dives into topics like Reinforcement Learning, Multimodal Models, and their applications in robotics.
-- **Project Breakdowns:** Behind-the-scenes looks at my projects, from initial concept to implementation.
-- **Research Summaries:** My thoughts and summaries on the latest papers and trends in the field.
-
-I hope this blog becomes a valuable resource for fellow students, researchers, and anyone interested in the future of intelligent systems. Stay tuned!
-        `,
-    },
-    {
-        slug: 'the-power-of-multimodality',
-        title: 'The Power of Multimodality in Robotics',
-        date: '2024-08-05',
-        excerpt: 'Exploring why combining vision, audio, and other senses is the key to building more capable and robust robots.',
-        content: `
-## Beyond Vision: Why Robots Need More Senses
-
-For a long time, computer vision has been the dominant sense for robots. While cameras provide a rich source of information, relying on vision alone has its limits. Think about a simple task: picking up a metal cup versus a paper cup. Visually, they might look similar, but the sound they make when tapped, or the force required to grasp them, is completely different.
-
-This is where **multimodality** comes in. By integrating information from various sources—like audio, touch (haptics), and even language—we can build robots that have a much deeper and more robust understanding of their environment.
-
-### My Research in Audio-informed Learning
-
-My recent work on "Audio-informed Imitation Learning" is a practical example. We tackled a task where a robot needed to distinguish between objects based on the sounds they made. The results were compelling: the robot's success rate jumped by over 57% when it could "hear" what it was doing.
-
-This shows that by giving robots more senses, we're not just adding redundant information. We're unlocking new capabilities and making them more adaptable to the complexities of the real world. The future of robotics is not just seeing, but sensing.
-`
-    }
-];
+// マークダウンファイルからPost配列を生成
+const posts: Post[] = Object.entries(markdownFiles).map(([path, content]) => {
+  const slug = getSlugFromPath(path);
+  const title = extractTitle(content as string);
+  const date = new Date().toISOString().split('T')[0]; // 現在の日付を使用
+  
+  return {
+    slug,
+    title,
+    date,
+    excerpt: '', // excerptは生成しない
+    content: content as string,
+  };
+});
 
 const BlogPage: FC = () => {
     const { slug } = useParams<{ slug: string }>();

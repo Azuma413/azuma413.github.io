@@ -14,7 +14,7 @@ const About: FC = () => {
           <AnimatedDiv className="flex-shrink-0" delay={200}>
             <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-2xl bg-slate-800 border-4 border-indigo-500/50 p-2">
                 <img
-                    src="https://picsum.photos/400/400?grayscale"
+                    src="/images/Fixed_square.jpg"
                     alt="Portrait of Kaneyoshi Hiratsuka"
                     className="w-full h-full object-cover rounded-full"
                 />

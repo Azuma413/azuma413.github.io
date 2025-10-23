@@ -75,7 +75,8 @@ For the 2025 Catch Robo contest, my friends and I developed a custom 6-axis mani
 - The system captured the controller's pose in real-time, solved the inverse kinematics, and sent joint commands to the physical robot, creating a seamless, low-latency user experience.
 
 ### YouTube Demo
-<iframe width="890" height="509" src="https://www.youtube.com/embed/UVwL7Nwp02o" title="第15回キャチロボバトルコンテスト・ライブ配信" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+3:06:53 mark:
+<iframe width="812" height="461" src="https://www.youtube.com/embed/UVwL7Nwp02o" title="第15回キャチロボバトルコンテスト・ライブ配信" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 `,
     imageUrl: '/images/aloha_arm.jpg',
     tags: ['Robotics', 'Teleoperation', 'Mixed Reality', 'Meta Quest', 'Inverse Kinematics'],
@@ -95,6 +96,8 @@ This project tackled the Sim2Real challenge for a line-following robot. The goal
 
 ### YouTube Demo
 <iframe width="890" height="509" src="https://www.youtube.com/embed/tTh6BYUjfMs" title="DrQ-v2でライントレース（実機）" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Also featured in KaiRA Journal vol.8: [https://kyoto-kaira.github.io/works/collection_of_journals.html](https://kyoto-kaira.github.io/works/collection_of_journals.html)
 `,
     imageUrl: '/images/sim2real-line-follower.png',
     tags: ['Reinforcement Learning', 'Sim2Real', 'DrQ-v2', 'Robotics', 'Raspberry Pi'],
@@ -132,6 +135,11 @@ This research focused on situations where vision fails, such as finding objects 
 - Implemented the DreamerV3 world model-based RL method.
 - The agent learned the temporal and spatial dynamics of the sound's direction, allowing it to build an internal model of the acoustic environment.
 - This internal model enabled the agent to learn efficient, long-term exploration strategies.
+
+### YouTube Demo
+<iframe width="556" height="1355" src="https://www.youtube.com/embed/M2v6pbK3IeE" title="音源追跡" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Paper: [https://www.jstage.jst.go.jp/article/jsaisigtwo/2024/Challenge-066/2024_07/_article/-char/ja/](https://www.jstage.jst.go.jp/article/jsaisigtwo/2024/Challenge-066/2024_07/_article/-char/ja/)
 `,
     imageUrl: '/images/sigai2024.png',
     tags: ['Robotics', 'RL', 'World Models', 'DreamerV3', 'Acoustics'],
@@ -205,7 +213,7 @@ For Sony's SSUP program, I developed a system that visualizes human momentum in 
 - This classification, combined with a biomechanical model, is used to calculate and visualize the user's momentum.
 
 ### YouTube Demo
-<iframe width="890" height="509" src="https://www.youtube.com/embed/-Gu7juZfhK8" title="imuを利用した動作の推定" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="860" height="484" src="https://www.youtube.com/embed/lkN7b5Yi3QY" title="Spresense運動量推定" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 `,
     imageUrl: '/images/sony_ssup.png',
     tags: ['Wearable', 'IMU', 'CNN', 'Real-time', 'Biomechanics', 'Sony Spresense'],
@@ -228,22 +236,25 @@ For Sony's SSUP program, I developed a system that visualizes human momentum in 
 //     tags: ['VLA', 'Diffusion Models', 'Flow Matching', 'Reinforcement Learning', 'ReinFlow', 'DSRL'],
 //   },
 
-//   {
-//     slug: 'kupac-community',
-//     title: 'KUPAC - Kyoto University Physical AI Community',
-//     description: 'Co-founded and organized KUPAC, a new student community for physical AI, and ran a hands-on workshop on imitation learning (ACT).',
-//     longDescription: `
-// ### Overview
-// I realized Kyoto University lacked a student community specializing in physical AI. To fill that gap, I worked with Assistant Professor Yagi and friends to start KUPAC.
+  {
+    slug: 'kupac-community',
+    title: 'KUPAC - Kyoto University Physical AI Community',
+    description: 'Co-founded and organized KUPAC, a new student community for physical AI, and ran a hands-on workshop on imitation learning (ACT).',
+    longDescription: `
+### Overview
+I realized Kyoto University lacked a student community specializing in physical AI. To fill that gap, I worked with Assistant Professor Yagi and friends to start KUPAC.
 
-// ### Key Activities
-// - As an organizer, I planned and ran a hands-on workshop on pick-and-place using the ACT imitation learning model.
-// - Participants went through the entire pipeline: data collection, model training, and deployment.
-// - This activity is focused on contributing to our shared knowledge and building the community.
-// `,
-//     imageUrl: '/images/kupac-workshop.png',
-//     tags: ['Community Building', 'Leadership', 'Imitation Learning', 'ACT', 'Workshop'],
-//   },
+### Key Activities
+- As an organizer, I planned and ran a hands-on workshop on pick-and-place using the ACT imitation learning model.
+- Participants went through the entire pipeline: data collection, model training, and deployment.
+- This activity is focused on contributing to our shared knowledge and building the community.
+
+### Hands-on Workshop Demo
+<iframe width="812" height="461" src="https://www.youtube.com/embed/ZGUetN6ywjc" title="ACT Attention可視化" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+`,
+    imageUrl: '/images/kupac-workshop.png',
+    tags: ['Community Building', 'Leadership', 'Imitation Learning', 'ACT', 'Workshop'],
+  },
 ];
 
 const ProjectCard: FC<{ project: Project }> = ({ project }) => (

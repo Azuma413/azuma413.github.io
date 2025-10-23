@@ -19,7 +19,9 @@ This research proposed a new task called "Acoustic-Informed Pick-and-Place," whe
 - Experiments in both simulation and the real world showed this method significantly improves success rates on tasks that depend on sound.
 - Currently extending this research to see how incorporating audio spectrograms impacts performance.
 
-[YouTube Demo](https://youtu.be/dJeQImQlrfs?si=QqPPD6kwLMxcsZUu)
+### YouTube Demo
+<iframe width="890" height="509" src="https://www.youtube.com/embed/dJeQImQlrfs" title="音環境認識ピックアンドプレース" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 `,
     imageUrl: '/images/rsj2025.png',
     tags: ['Imitation Learning', 'Robotics', 'Multimodal', 'Acoustics', 'Computer Vision'],
@@ -90,7 +92,8 @@ This project tackled the Sim2Real challenge for a line-following robot. The goal
 - **Diverse Simulation:** Wrote a program using a Breadth-First Search (BFS) algorithm to automatically generate thousands of complex and diverse courses, boosting model robustness.
 - **Model Efficiency:** Modified the DrQ-v2 architecture to accept both image and low-dimensional inputs (orientation, velocity), drastically reducing model size for efficient execution on a Raspberry Pi 5.
 
-[YouTube Demo](https://youtu.be/tTh6BYUjfMs?si=uxRUBsQIgf7Xp6Ua)
+### YouTube Demo
+<iframe width="890" height="509" src="https://www.youtube.com/embed/tTh6BYUjfMs" title="DrQ-v2でライントレース（実機）" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 `,
     imageUrl: '/images/sim2real-line-follower.png',
     tags: ['Reinforcement Learning', 'Sim2Real', 'DrQ-v2', 'Robotics', 'Raspberry Pi'],
@@ -109,7 +112,8 @@ To explore the capabilities of Large Language Models, I developed a YouTube stre
 - The LLM was prompted to generate both text and a corresponding "emotion" or "action" label.
 - A system in Unity received this label and triggered a matching animation for the character model, creating the appearance of emotions and personalities.
 
-[YouTube Demo](https://youtu.be/zS5Wg6DVSHs?si=DdMxZmvij2V2IWXk)
+### YouTube Demo
+<iframe width="890" height="509" src="https://www.youtube.com/embed/zS5Wg6DVSHs" title="AI Vtuber ディベート" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 `,
     imageUrl: '/images/ai-debate-unity.png',
     tags: ['LLM', 'Embodied AI', 'Unity', 'Generative AI', 'Character Animation'],
@@ -179,7 +183,8 @@ A friend and I were selected for the METI NEP grant program for our project, "Au
 - We aim to commercialize the technology.
 - We are developing a prototype that uses a pseudo ALOHA arm to handle garments while a vision system takes measurements automatically.
 
-[YouTube Demo](https://youtu.be/rp29SOOsv8U)
+### YouTube Demo
+<iframe width="890" height="509" src="https://www.youtube.com/embed/rp29SOOsv8U" title="SO-101 Genesis" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 `,
     imageUrl: '/images/meti-nep.png',
     tags: ['Imitation Learning', 'Robotics', 'ALOHA', 'Computer Vision', 'Entrepreneurship'],
@@ -198,7 +203,8 @@ For Sony's SSUP program, I developed a system that visualizes human momentum in 
 - Time-series data from the IMUs are fed into a lightweight CNN to classify motion (e.g., "walking").
 - This classification, combined with a biomechanical model, is used to calculate and visualize the user's momentum.
 
-[YouTube Demo](https://youtu.be/-Gu7juZfhK8?si=9Xt6OLUwm8l2B4Uw)
+### YouTube Demo
+<iframe width="890" height="509" src="https://www.youtube.com/embed/-Gu7juZfhK8" title="imuを利用した動作の推定" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 `,
     imageUrl: '/images/sony_ssup.png',
     tags: ['Wearable', 'IMU', 'CNN', 'Real-time', 'Biomechanics', 'Sony Spresense'],

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
+import rehypeRaw from 'rehype-raw';
 
 interface MarkdownRendererProps {
   children: string;
@@ -11,8 +12,19 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ children }) => {
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm, remarkBreaks]}
+      rehypePlugins={[rehypeRaw]}
       className="prose lg:prose-xl max-w-none"
       components={{
+        // iframeをレスポンシブなdivでラップ
+        iframe: ({ node, ...props }) => (
+          <div className="relative w-full my-6" style={{ paddingBottom: '56.25%' }}>
+            <iframe
+              {...props}
+              className="absolute top-0 left-0 w-full h-full rounded-lg shadow-lg"
+              loading="lazy"
+            />
+          </div>
+        ),
         h1: ({ node, ...props }) => (
           <h1 className="text-4xl font-bold mb-4 text-white" {...props} />
         ),

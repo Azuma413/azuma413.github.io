@@ -7,6 +7,10 @@ const Hero: FC = () => {
         {/* Background Gradient */}
         <div className="absolute inset-0 z-0">
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-900/50"></div>
+            <div 
+                className="absolute inset-0 bg-cover bg-center opacity-20 grayscale"
+                style={{ backgroundImage: "url('/images/background.jpg')" }}
+            ></div>
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full filter blur-3xl opacity-50 animate-blob"></div>
             <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full filter blur-3xl opacity-50 animate-blob animation-delay-2000"></div>
             <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-600/20 rounded-full filter blur-3xl opacity-50 animate-blob animation-delay-4000"></div>
@@ -20,19 +24,22 @@ const Hero: FC = () => {
             </AnimatedDiv>
             <AnimatedDiv delay={200}>
                 <p className="max-w-3xl mx-auto text-lg sm:text-xl text-slate-400 mb-8">
-                    AI Researcher & Software Engineer passionate about Robotics, Multimodal Learning, and creating intelligent autonomous systems.
+                    AI Researcher & Software Engineer passionate about 
+                    <span className="text-indigo-300 font-medium"> Robotics</span>, 
+                    <span className="text-indigo-300 font-medium"> Multimodal Learning</span>, 
+                    and creating intelligent autonomous systems.
                 </p>
             </AnimatedDiv>
-            {/* <AnimatedDiv delay={400}>
+            <AnimatedDiv delay={400}>
                 <a
                     href="#projects"
                     className="inline-block bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-500 transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
                     View My Work
                 </a>
-            </AnimatedDiv> */}
+            </AnimatedDiv>
         </div>
-        
+
         <style>{`
             .animate-blob {
                 animation: blob 7s infinite;

@@ -167,21 +167,23 @@ This research focused on situations where vision fails, such as finding objects 
 //     tags: ['LLM', 'Code Generation', 'CAD', 'Fine-Tuning', 'RLHF', 'GRPO'],
 //   },
 
-//   {
-//     slug: 'meti-nep-clothing',
-//     title: 'METI NEP: Automation of Clothing Measurement',
-//     description: 'Selected for the METI NEP grant to develop and commercialize a system for automating clothing measurement using imitation learning.',
-//     longDescription: `
-// ### Overview
-// A friend and I were selected for the METI NEP grant program for our project, "Automation of Clothing Measurement Using Imitation Learning."
+  {
+    slug: 'meti-nep-clothing',
+    title: 'METI NEP: Automation of Clothing Measurement',
+    description: 'Selected for the METI NEP grant to develop and commercialize a system for automating clothing measurement using imitation learning.',
+    longDescription: `
+### Overview
+A friend and I were selected for the METI NEP grant program for our project, "Automation of Clothing Measurement Using Imitation Learning."
 
-// ### Key Goals
-// - We aim to commercialize the technology.
-// - We are developing a prototype that uses a pseudo ALOHA arm to handle garments while a vision system takes measurements automatically.
-// `,
-//     imageUrl: '/images/meti-nep.png',
-//     tags: ['Imitation Learning', 'Robotics', 'ALOHA', 'Computer Vision', 'Entrepreneurship'],
-//   },
+### Key Goals
+- We aim to commercialize the technology.
+- We are developing a prototype that uses a pseudo ALOHA arm to handle garments while a vision system takes measurements automatically.
+
+[YouTube Demo](https://youtu.be/rp29SOOsv8U)
+`,
+    imageUrl: '/images/meti-nep.png',
+    tags: ['Imitation Learning', 'Robotics', 'ALOHA', 'Computer Vision', 'Entrepreneurship'],
+  },
 
   {
     slug: 'sony-ssup-momentum',

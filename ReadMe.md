@@ -11,4 +11,10 @@ npm run build
 ```
 生成されたdistディレクトリの中身をdistブランチにpush
 ## 編集
-Projectはcomponents\Projects.tsxに追加．
+Projectはcomponents/Projects.tsxに追加．
+
+Project用の画像はpublic/imagesに追加．
+
+Blogはdocs/に追加．
+
+Blog用の画像はpublic/sourceに追加．

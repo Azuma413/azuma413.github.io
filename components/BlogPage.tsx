@@ -74,7 +74,7 @@ const posts: Post[] = Object.entries(markdownFiles).map(([path, rawContent]) => 
     excerpt: data.excerpt || '',
     content: content,
   };
-});
+}).sort((a, b) => b.slug.localeCompare(a.slug)); // アルファベット降順でソート
 
 const BlogPage: FC = () => {
     const { slug } = useParams<{ slug: string }>();

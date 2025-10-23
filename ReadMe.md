@@ -10,3 +10,5 @@ npm run dev
 npm run build
 ```
 生成されたdistディレクトリの中身をdistブランチにpush
+## 編集
+Projectはcomponents\Projects.tsxに追加．

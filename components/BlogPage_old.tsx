@@ -8,42 +8,10 @@ import MarkdownRenderer from './MarkdownRenderer';
 // Viteのimport.meta.globを使ってdocs/内のマークダウンファイルを動的に読み込む
 const markdownFiles = import.meta.glob('../docs/*.md', { eager: true, query: '?raw', import: 'default' });
 
-// シンプルなFront Matterパーサー
-interface FrontMatterResult {
-  data: Record<string, string>;
-  content: string;
-}
-
-const parseFrontMatter = (markdown: string): FrontMatterResult => {
-  const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-  const match = markdown.match(frontMatterRegex);
-
-  if (!match) {
-    // Front Matterがない場合は空のdataと元のcontentを返す
-    return { data: {}, content: markdown };
-  }
-
-  const frontMatterText = match[1];
-  const content = match[2];
-
-  // Front MatterをYAML風にパース（簡易版）
-  const data: Record<string, string> = {};
-  const lines = frontMatterText.split('\n');
-  
-  for (const line of lines) {
-    const colonIndex = line.indexOf(':');
-    if (colonIndex > 0) {
-      const key = line.substring(0, colonIndex).trim();
-      let value = line.substring(colonIndex + 1).trim();
-      
-      // クォートを削除
-      value = value.replace(/^["']|["']$/g, '');
-      
-      data[key] = value;
-    }
-  }
-
-  return { data, content };
+// マークダウンファイルからタイトルを抽出する関数
+const extractTitle = (content: string): string => {
+  const match = content.match(/^#\s+(.+)$/m);
+  return match ? match[1] : 'Untitled';
 };
 
 // ファイルパスからslugを生成する関数
@@ -53,26 +21,17 @@ const getSlugFromPath = (path: string): string => {
 };
 
 // マークダウンファイルからPost配列を生成
-const posts: Post[] = Object.entries(markdownFiles).map(([path, rawContent]) => {
+const posts: Post[] = Object.entries(markdownFiles).map(([path, content]) => {
   const slug = getSlugFromPath(path);
-
-  // カスタムパーサーでFront Matterと本文をパース
-  const { data, content } = parseFrontMatter(rawContent as string);
-
-  // Front Matterから情報を取得
-  const title = data.title || 'Untitled';
-  
-  // dateを取得。なければ今日の日付をフォールバック
-  const date = data.date 
-    ? new Date(data.date).toISOString().split('T')[0] 
-    : new Date().toISOString().split('T')[0];
+  const title = extractTitle(content as string);
+  const date = new Date().toISOString().split('T')[0]; // 現在の日付を使用
   
   return {
     slug,
     title,
     date,
-    excerpt: data.excerpt || '',
-    content: content,
+    excerpt: '', // excerptは生成しない
+    content: content as string,
   };
 });
 

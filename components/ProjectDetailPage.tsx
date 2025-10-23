@@ -1,12 +1,13 @@
 import React, { useEffect, FC } from 'react';
 // Fix: Corrected import for react-router-dom.
-import { useParams, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { projectsData } from './Projects';
 import AnimatedDiv from './AnimatedDiv';
 import MarkdownRenderer from './MarkdownRenderer';
 
 const ProjectDetailPage: FC = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
   const project = projectsData.find(p => p.slug === slug);
 
   useEffect(() => {
@@ -17,9 +18,9 @@ const ProjectDetailPage: FC = () => {
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 text-center">
         <h1 className="text-4xl font-bold text-white mb-4">Project not found</h1>
-        <Link to="/" className="text-indigo-400 hover:text-indigo-300">
+        <button onClick={() => navigate('/')} className="text-indigo-400 hover:text-indigo-300">
           &larr; Back to Home
-        </Link>
+        </button>
       </div>
     );
   }
@@ -28,9 +29,9 @@ const ProjectDetailPage: FC = () => {
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
       <AnimatedDiv>
         <div className="max-w-4xl mx-auto">
-            <Link to="/#projects" className="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">
+            <button onClick={() => navigate(-1)} className="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">
                 &larr; Back to Projects
-            </Link>
+            </button>
             <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">{project.title}</h1>
             
             <div className="flex flex-wrap gap-2 my-6">

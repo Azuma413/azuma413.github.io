@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "node scripts/fetch-url-metadata.js && vite build",
+    "prebuild": "node scripts/fetch-url-metadata.js",
+    "preview": "vite preview",
+    "fetch-metadata": "node scripts/fetch-url-metadata.js"
   },
   "dependencies": {
     "react": "^19.2.0",

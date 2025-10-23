@@ -6,6 +6,7 @@ npm install
 ## テスト
 以下のコマンドで表示されたURLを確認
 ```bash
+npm run fetch-metadata
 npm run dev
 ```
 ## ビルド

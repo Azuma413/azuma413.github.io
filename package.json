@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/fetch-url-metadata.js && vite build",
+    "build": "node scripts/fetch-url-metadata.js && vite build && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
     "prebuild": "node scripts/fetch-url-metadata.js",
     "preview": "vite preview",
     "fetch-metadata": "node scripts/fetch-url-metadata.js"

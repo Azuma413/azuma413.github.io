@@ -74,7 +74,8 @@ For the 2025 Catch Robo contest, my friends and I developed a custom 6-axis mani
 - Leveraged Mixed Reality to render a virtual master arm, which the operator manipulated with Quest controllers.
 - The system captured the controller's pose in real-time, solved the inverse kinematics, and sent joint commands to the physical robot, creating a seamless, low-latency user experience.
 
-[YouTube Demo](https://www.youtube.com/clip/UgkxalU8B6Nr0ELKhK3GheTG99FEA0YS56CN)
+### YouTube Demo
+<iframe width="890" height="509" src="https://www.youtube.com/embed/UVwL7Nwp02o" title="第15回キャチロボバトルコンテスト・ライブ配信" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 `,
     imageUrl: '/images/aloha_arm.jpg',
     tags: ['Robotics', 'Teleoperation', 'Mixed Reality', 'Meta Quest', 'Inverse Kinematics'],

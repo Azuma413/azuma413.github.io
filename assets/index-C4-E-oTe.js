@@ -181,9 +181,9 @@ excerpt: "ここに概要文を書きます"\r
 これはテストページです。\r
 \r
 ## テスト\r
-以下は\`docs/sources/test.jpg\`の画像を表示しています：\r
+以下は\`sources/test.jpg\`の画像を表示しています：\r
 \r
-![テスト画像](sources/test.jpg)\r
+![テスト画像](../sources/test.jpg)\r
 \r
 マークダウン内で画像を表示する場合は、\`sources/\`から始まるパスを使用してください。\r
 ほげほげ\r

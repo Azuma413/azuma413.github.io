@@ -56,9 +56,8 @@ const Header: FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-slate-900/80 backdrop-blur-sm shadow-lg' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-slate-900/80 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+        }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -71,7 +70,7 @@ const Header: FC = () => {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link)}
-                className="text-slate-300 hover:text-indigo-400 transition-colors duration-200"
+                className="text-slate-300 hover:text-slate-300 transition-colors duration-200"
               >
                 {link.label}
               </a>
@@ -101,9 +100,8 @@ const Header: FC = () => {
       </div>
       {/* Mobile Menu */}
       <div
-        className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
-          isOpen ? 'max-h-96' : 'max-h-0'
-        } ${isScrolled || isOpen ? 'bg-slate-900/95' : 'bg-transparent'}`}
+        className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-96' : 'max-h-0'
+          } ${isScrolled || isOpen ? 'bg-slate-900/95' : 'bg-transparent'}`}
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           {navLinks.map((link) => (

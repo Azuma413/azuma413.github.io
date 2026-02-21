@@ -21,7 +21,7 @@ async function loadMetadataCache() {
   if (metadataCache !== null) {
     return metadataCache;
   }
-  
+
   try {
     const response = await fetch('/url-metadata.json');
     if (response.ok) {
@@ -33,7 +33,7 @@ async function loadMetadataCache() {
     console.error('メタデータキャッシュの読み込みに失敗しました:', error);
     metadataCache = {};
   }
-  
+
   return metadataCache;
 }
 
@@ -51,7 +51,7 @@ const UrlPreviewCard: FC<{ url: string }> = ({ url }) => {
     const fetchMetadata = async () => {
       try {
         const cache = await loadMetadataCache();
-        
+
         if (cache[url]) {
           // キャッシュからメタデータを取得
           setMetadata(cache[url]);
@@ -59,7 +59,7 @@ const UrlPreviewCard: FC<{ url: string }> = ({ url }) => {
           // キャッシュにない場合はフォールバック
           const urlObj = new URL(url);
           const domain = urlObj.hostname.replace('www.', '');
-          
+
           setMetadata({
             title: domain,
             description: url,
@@ -73,7 +73,7 @@ const UrlPreviewCard: FC<{ url: string }> = ({ url }) => {
         try {
           const urlObj = new URL(url);
           const domain = urlObj.hostname.replace('www.', '');
-          
+
           setMetadata({
             title: domain,
             description: url,
@@ -110,7 +110,7 @@ const UrlPreviewCard: FC<{ url: string }> = ({ url }) => {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block my-4 p-4 border border-slate-700 rounded-lg bg-slate-800/50 hover:bg-slate-800 hover:border-indigo-500 transition-all duration-200 no-underline group"
+      className="block my-4 p-4 border border-slate-700 rounded-lg bg-slate-800/50 hover:bg-slate-800 hover:border-slate-500 transition-all duration-200 no-underline group"
     >
       <div className="flex items-start gap-3">
         {metadata?.favicon && (
@@ -124,7 +124,7 @@ const UrlPreviewCard: FC<{ url: string }> = ({ url }) => {
           />
         )}
         <div className="flex-1 min-w-0">
-          <div className="text-white font-medium mb-1 group-hover:text-indigo-400 transition-colors line-clamp-2">
+          <div className="text-white font-medium mb-1 group-hover:text-slate-300 transition-colors line-clamp-2">
             {metadata?.title || 'Link'}
           </div>
           <div className="text-slate-400 text-sm truncate">
@@ -151,7 +151,7 @@ const convertUrlsToEmbeds = (markdown: string): string => {
   const lines = markdown.split('\n');
   const processedLines = lines.map((line) => {
     const trimmedLine = line.trim();
-    
+
     // URL単体の行かチェック（前後に他のテキストがない）
     const urlRegex = /^https?:\/\/[^\s]+$/;
     if (!urlRegex.test(trimmedLine)) {
@@ -159,7 +159,7 @@ const convertUrlsToEmbeds = (markdown: string): string => {
     }
 
     const url = trimmedLine;
-    
+
     // URLをカスタムHTMLタグで囲む（後でReactコンポーネントに置き換える）
     return `<url-preview data-url="${url}"></url-preview>`;
   });
@@ -193,22 +193,22 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ children }) => {
           </div>
         ),
         h1: ({ node, ...props }) => (
-          <h1 className="text-4xl font-bold mb-4 text-white" {...props} />
+          <h1 className="text-4xl font-bold mb-4 text-white font-heading" {...props} />
         ),
         h2: ({ node, ...props }) => (
-          <h2 className="text-3xl font-bold mb-3 text-white" {...props} />
+          <h2 className="text-3xl font-bold mb-3 text-white font-heading" {...props} />
         ),
         h3: ({ node, ...props }) => (
-          <h3 className="text-2xl font-bold mb-2 text-white" {...props} />
+          <h3 className="text-2xl font-bold mb-2 text-white font-heading" {...props} />
         ),
         h4: ({ node, ...props }) => (
-          <h4 className="text-xl font-bold mb-2 text-white" {...props} />
+          <h4 className="text-xl font-bold mb-2 text-white font-heading" {...props} />
         ),
         h5: ({ node, ...props }) => (
-          <h5 className="text-lg font-bold mb-1 text-white" {...props} />
+          <h5 className="text-lg font-bold mb-1 text-white font-heading" {...props} />
         ),
         h6: ({ node, ...props }) => (
-          <h6 className="text-base font-bold mb-1 text-white" {...props} />
+          <h6 className="text-base font-bold mb-1 text-white font-heading" {...props} />
         ),
         p: ({ node, ...props }) => (
           <p className="mb-4 text-slate-300" {...props} />
@@ -223,7 +223,7 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ children }) => {
           <li className="text-slate-300" {...props} />
         ),
         blockquote: ({ node, ...props }) => (
-          <blockquote className="border-l-4 border-indigo-500 pl-4 py-2 my-4 italic text-slate-400 bg-slate-800/30 [&>p]:mb-2 [&>p:last-child]:mb-0"
+          <blockquote className="border-l-4 border-slate-500 pl-4 py-2 my-4 italic text-slate-400 bg-slate-800/30 [&>p]:mb-2 [&>p:last-child]:mb-0"
             {...props}
           >
             {props.children}
@@ -234,7 +234,7 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ children }) => {
           const src = props.src?.startsWith('sources/')
             ? `/docs/${props.src}`
             : props.src;
-          
+
           return (
             <img
               {...props}

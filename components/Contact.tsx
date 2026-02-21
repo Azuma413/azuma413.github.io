@@ -55,7 +55,7 @@ const Contact: FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedDiv>
           <div className="max-w-3xl mx-auto text-center bg-slate-800/50 rounded-lg p-8 sm:p-12 shadow-2xl border border-slate-700">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 font-heading">
               Connect with me
             </h2>
             <p className="text-lg text-slate-400 mb-8">
@@ -68,7 +68,7 @@ const Contact: FC = () => {
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-slate-700/50 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="flex items-center gap-2 bg-slate-700/50 hover:bg-slate-600 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
                   {social.icon}
                   <span>{social.name}</span>

@@ -6,6 +6,59 @@ import AnimatedDiv from './AnimatedDiv';
 
 export const projectsData: Project[] = [
   {
+    slug: 'matsuo-institute-vla',
+    title: 'Matsuo Institute: VLA for Autonomous Driving',
+    description: 'Engaged in closed-loop autonomous driving verification and model refinement in CARLA, building upon Simlingo and OpenEMMA.',
+    longDescription: `
+### Overview
+At Matsuo Institute, I am working on the development of a Vision-Language-Action (VLA) model for autonomous driving. This project builds upon existing research such as Simlingo and OpenEMMA.
+
+### Key Activities
+- Conducted closed-loop autonomous driving verification using CARLA, an Unreal Engine-based simulator.
+- Focused on identifying failure cases and continuously improving the model's capabilities to navigate complex driving scenarios.
+`,
+    imageUrl: '/images/openema.png',
+    tags: ['VLA', 'Autonomous Driving', 'CARLA', 'Simlingo', 'Generative AI'],
+  },
+
+  {
+    slug: 'differentiable-bone-metabolism',
+    title: 'Graduation Research: Differentiable Bone Metabolism Simulator',
+    description: 'Developed a differentiable bone metabolism simulator. Specific details are currently undisclosed pending patent application.',
+    longDescription: `
+### Overview
+For my graduation research, I developed a novel differentiable bone metabolism simulator.
+
+### Current Status
+*Specific technical details and achievements are currently omitted as a patent application is in preparation.*
+`,
+    imageUrl: '/images/noimage.png',
+    tags: ['Simulation', 'Differentiable Physics', 'Bioengineering', 'Research'],
+  },
+
+  {
+    slug: 'kyoto-univ-nf-act',
+    title: 'Kyoto University NF: Imitation Learning Demo',
+    description: 'Exhibited an imitation learning demonstration using Action Chunking with Transformer (ACT) on a custom open-source robot manipulator, ILOHA.',
+    longDescription: `
+### Overview
+At the Kyoto University November Festival (NF), I showcased an imitation learning demonstration using a custom-built, open-source robot manipulator named ILOHA.
+
+### Key Highlights
+- Implemented and demonstrated an Action Chunking with Transformer (ACT) model on the physical robot.
+- Showcased the robot's ability to perform complex, learned manipulation tasks autonomously to public audiences.
+
+### Technical Details & Demo
+- **Qiita Article:** [Read the detailed technical write-up on Qiita](https://qiita.com/hirekatsu0523/items/0b850d63bb9c7182e2fb)
+
+### YouTube Demo
+<iframe width="890" height="509" src="https://www.youtube.com/embed/rdS3Xbs53qA" title="Kyoto Univ NF ILOHA Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+`,
+    imageUrl: '/images/nf.png',
+    tags: ['Robotics', 'Imitation Learning', 'ACT', 'Open Source', 'ILOHA'],
+  },
+
+  {
     slug: 'audio-imitation-learning',
     title: 'RSJ 2025: Audio-informed Imitation Learning',
     description: 'A novel method to integrate audio signals for manipulation tasks unsolvable with visual information alone.',
@@ -145,40 +198,40 @@ Paper: [https://www.jstage.jst.go.jp/article/jsaisigtwo/2024/Challenge-066/2024_
     tags: ['Robotics', 'RL', 'World Models', 'DreamerV3', 'Acoustics'],
   },
 
-//   {
-//     slug: 'differentiable-bone-simulator',
-//     title: 'Differentiable Bone Remodeling Simulator',
-//     description: 'Leading a project to develop a multi-physics bone remodeling simulator (FEM + reaction-diffusion) in JAX to solve inverse problems.',
-//     longDescription: `
-// ### Overview
-// Currently leading a project to develop a differentiable bone remodeling simulator using JAX. It is a complex multi-physics simulator combining the Finite Element Method with a reaction-diffusion system.
+  //   {
+  //     slug: 'differentiable-bone-simulator',
+  //     title: 'Differentiable Bone Remodeling Simulator',
+  //     description: 'Leading a project to develop a multi-physics bone remodeling simulator (FEM + reaction-diffusion) in JAX to solve inverse problems.',
+  //     longDescription: `
+  // ### Overview
+  // Currently leading a project to develop a differentiable bone remodeling simulator using JAX. It is a complex multi-physics simulator combining the Finite Element Method with a reaction-diffusion system.
 
-// ### Key Goals
-// - Make the entire simulation pipeline differentiable to efficiently solve inverse problems using gradient-based optimization.
-// - This allows answering questions like, "What are the best loading conditions to achieve a target bone strength?"
-// - We are also developing a model to connect the simulator with real clinical data, bridging physics-based simulation and clinical applications.
-// `,
-//     imageUrl: '/images/v-bone-jax.png',
-//     tags: ['JAX', 'Differentiable Physics', 'Simulation', 'Finite Element Method', 'Bioengineering'],
-//   },
+  // ### Key Goals
+  // - Make the entire simulation pipeline differentiable to efficiently solve inverse problems using gradient-based optimization.
+  // - This allows answering questions like, "What are the best loading conditions to achieve a target bone strength?"
+  // - We are also developing a model to connect the simulator with real clinical data, bridging physics-based simulation and clinical applications.
+  // `,
+  //     imageUrl: '/images/v-bone-jax.png',
+  //     tags: ['JAX', 'Differentiable Physics', 'Simulation', 'Finite Element Method', 'Bioengineering'],
+  //   },
 
-//   {
-//     slug: 'cad-generation-llm',
-//     title: 'CAD-Generation LLM with GRPO',
-//     description: 'Leading R&D at my startup to fine-tune an LLM for CAD generation using Python scripting and a GRPO-based reward mechanism.',
-//     longDescription: `
-// ### Overview
-// As CTO of my co-founded startup, I am leading internal R&D to develop a CAD-generation LLM.
+  //   {
+  //     slug: 'cad-generation-llm',
+  //     title: 'CAD-Generation LLM with GRPO',
+  //     description: 'Leading R&D at my startup to fine-tune an LLM for CAD generation using Python scripting and a GRPO-based reward mechanism.',
+  //     longDescription: `
+  // ### Overview
+  // As CTO of my co-founded startup, I am leading internal R&D to develop a CAD-generation LLM.
 
-// ### Key Approach
-// - We are using a novel approach: fine-tuning a base LLM using GRPO.
-// - The model generates Python scripts that create CAD models.
-// - These scripts are then evaluated by a reward function based on geometric validity and successful execution.
-// - This score acts as a reward signal to efficiently specialize the LLM for this complex task.
-// `,
-//     imageUrl: '/images/cad-llm.png',
-//     tags: ['LLM', 'Code Generation', 'CAD', 'Fine-Tuning', 'RLHF', 'GRPO'],
-//   },
+  // ### Key Approach
+  // - We are using a novel approach: fine-tuning a base LLM using GRPO.
+  // - The model generates Python scripts that create CAD models.
+  // - These scripts are then evaluated by a reward function based on geometric validity and successful execution.
+  // - This score acts as a reward signal to efficiently specialize the LLM for this complex task.
+  // `,
+  //     imageUrl: '/images/cad-llm.png',
+  //     tags: ['LLM', 'Code Generation', 'CAD', 'Fine-Tuning', 'RLHF', 'GRPO'],
+  //   },
 
   {
     slug: 'meti-nep-clothing',
@@ -219,22 +272,22 @@ For Sony's SSUP program, I developed a system that visualizes human momentum in 
     tags: ['Wearable', 'IMU', 'CNN', 'Real-time', 'Biomechanics', 'Sony Spresense'],
   },
 
-//   {
-//     slug: 'airoa-vla-competition',
-//     title: 'AIRoA VLA Competition (Diffusion/Flow Policies)',
-//     description: 'Implemented and evaluated advanced methods like ReinFlow and DSRL to stably train VLA policies based on Diffusion and Flow Matching.',
-//     longDescription: `
-// ### Overview
-// In the AIRoA VLA Competition, I focused on training VLA models that use Diffusion or Flow Matching as their policy, which often suffer from policy collapse.
+  //   {
+  //     slug: 'airoa-vla-competition',
+  //     title: 'AIRoA VLA Competition (Diffusion/Flow Policies)',
+  //     description: 'Implemented and evaluated advanced methods like ReinFlow and DSRL to stably train VLA policies based on Diffusion and Flow Matching.',
+  //     longDescription: `
+  // ### Overview
+  // In the AIRoA VLA Competition, I focused on training VLA models that use Diffusion or Flow Matching as their policy, which often suffer from policy collapse.
 
-// ### Key Achievements
-// - Implemented and evaluated advanced methods like ReinFlow, which adapts DPPO for Flow Matching models by framing the denoising process as an MDP.
-// - Worked on reproducing DSRL, a method that applies an RL framework to generative models by treating noise inputs as actions.
-// - Gained a deep theoretical and practical understanding of how to stably train these cutting-edge models.
-// `,
-//     imageUrl: '/images/airoa-vla.png',
-//     tags: ['VLA', 'Diffusion Models', 'Flow Matching', 'Reinforcement Learning', 'ReinFlow', 'DSRL'],
-//   },
+  // ### Key Achievements
+  // - Implemented and evaluated advanced methods like ReinFlow, which adapts DPPO for Flow Matching models by framing the denoising process as an MDP.
+  // - Worked on reproducing DSRL, a method that applies an RL framework to generative models by treating noise inputs as actions.
+  // - Gained a deep theoretical and practical understanding of how to stably train these cutting-edge models.
+  // `,
+  //     imageUrl: '/images/airoa-vla.png',
+  //     tags: ['VLA', 'Diffusion Models', 'Flow Matching', 'Reinforcement Learning', 'ReinFlow', 'DSRL'],
+  //   },
 
   {
     slug: 'kupac-community',
@@ -258,25 +311,25 @@ I realized Kyoto University lacked a student community specializing in physical 
 ];
 
 const ProjectCard: FC<{ project: Project }> = ({ project }) => (
-    <div className="bg-slate-800/50 rounded-lg overflow-hidden shadow-lg hover:shadow-indigo-500/40 transition-all duration-300 transform hover:-translate-y-2 group flex flex-col">
-        <div className="overflow-hidden">
-            <img src={project.imageUrl} alt={project.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
-        </div>
-        <div className="p-6 flex flex-col flex-grow">
-            <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-            <p className="text-slate-400 mb-4 flex-grow">{project.description}</p>
-            <div className="flex flex-wrap gap-2 mb-4">
-                {project.tags.map(tag => (
-                    <span key={tag} className="bg-slate-700 text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-full">{tag}</span>
-                ))}
-            </div>
-            <div className="mt-auto">
-                <Link to={`/projects/${project.slug}`} className="inline-block bg-indigo-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-indigo-500 transition-colors duration-300">
-                    View Details
-                </Link>
-            </div>
-        </div>
+  <div className="bg-slate-800/50 rounded-lg overflow-hidden shadow-lg hover:shadow-slate-700/50 transition-all duration-300 transform hover:-translate-y-2 group flex flex-col">
+    <div className="overflow-hidden">
+      <img src={project.imageUrl} alt={project.title} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
     </div>
+    <div className="p-6 flex flex-col flex-grow">
+      <h3 className="text-xl font-bold text-white mb-2 font-heading">{project.title}</h3>
+      <p className="text-slate-400 mb-4 flex-grow">{project.description}</p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        {project.tags.map(tag => (
+          <span key={tag} className="bg-slate-700 text-slate-300 text-xs font-semibold px-2.5 py-1 rounded-full">{tag}</span>
+        ))}
+      </div>
+      <div className="mt-auto">
+        <Link to={`/projects/${project.slug}`} className="inline-block bg-slate-700 border border-slate-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-slate-600 transition-colors duration-300">
+          View Details
+        </Link>
+      </div>
+    </div>
+  </div>
 );
 
 
@@ -285,7 +338,7 @@ const Projects: FC = () => {
     <section id="projects" className="py-20 lg:py-32 bg-slate-900/70">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedDiv>
-          <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-12 font-heading">
             My Projects & Research
           </h2>
         </AnimatedDiv>

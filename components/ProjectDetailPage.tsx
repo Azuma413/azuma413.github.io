@@ -17,8 +17,8 @@ const ProjectDetailPage: FC = () => {
   if (!project) {
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 text-center">
-        <h1 className="text-4xl font-bold text-white mb-4">Project not found</h1>
-        <button onClick={() => navigate('/')} className="text-indigo-400 hover:text-indigo-300">
+        <h1 className="text-4xl font-bold text-white mb-4 font-heading">Project not found</h1>
+        <button onClick={() => navigate('/')} className="text-slate-400 hover:text-slate-300">
           &larr; Back to Home
         </button>
       </div>
@@ -29,22 +29,22 @@ const ProjectDetailPage: FC = () => {
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
       <AnimatedDiv>
         <div className="max-w-4xl mx-auto">
-            <button onClick={() => navigate(-1)} className="text-indigo-400 hover:text-indigo-300 mb-8 inline-block">
-                &larr; Back to Projects
-            </button>
-            <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">{project.title}</h1>
-            
-            <div className="flex flex-wrap gap-2 my-6">
-                {project.tags.map(tag => (
-                    <span key={tag} className="bg-slate-700 text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-full">{tag}</span>
-                ))}
-            </div>
+          <button onClick={() => navigate(-1)} className="text-slate-400 hover:text-slate-300 mb-8 inline-block">
+            &larr; Back to Projects
+          </button>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 font-heading">{project.title}</h1>
 
-            <img src={project.imageUrl} alt={project.title} className="w-full h-auto object-cover rounded-lg shadow-lg mb-8" />
-            
-            <div className="text-slate-300">
-                <MarkdownRenderer>{project.longDescription}</MarkdownRenderer>
-            </div>
+          <div className="flex flex-wrap gap-2 my-6">
+            {project.tags.map(tag => (
+              <span key={tag} className="bg-slate-700 text-slate-300 text-xs font-semibold px-2.5 py-1 rounded-full">{tag}</span>
+            ))}
+          </div>
+
+          <img src={project.imageUrl} alt={project.title} className="w-full h-auto object-cover rounded-lg shadow-lg mb-8" />
+
+          <div className="text-slate-300">
+            <MarkdownRenderer>{project.longDescription}</MarkdownRenderer>
+          </div>
         </div>
       </AnimatedDiv>
     </div>

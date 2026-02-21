@@ -1,0 +1,26 @@
+{
+  "https://ncode.syosetu.com/n1179ip/": {
+    "title": "【連載版】もしも田中角栄がヒトラーに転生したら",
+    "description": "R15 残酷な描写あり 異世界転生 男主人公 昭和 内政 タイムトラベル IF戦記 逆行転生 田中角栄 ヒトラー 戦争 仮想戦記 架空戦記",
+    "image": "https://sbo.syosetu.com/n1179ip/twitter.png",
+    "favicon": "https://www.google.com/s2/favicons?domain=ncode.syosetu.com&sz=64"
+  },
+  "https://note.com/hito_horobe/n/n9028d0a7e973": {
+    "title": "おれらのことバカにしてんのか？Grokのコンパニオンモードを使ってみた感想・他（2025年7月14日の日記）｜人間が大好き",
+    "description": "生活  　暑くはないが、台風が来る前の湿気とぬるい風の日だった。洗濯物はあまり乾かずサーキュレーターを使う。仕事では会議、仕様の検討、コードレビューをこなし、疲れて一回昼寝、そのあと起きてバグ報告などをこなし21時少し前に終業。夕食に魚のココナッツカレーを作る。アニメを見たり、副業でやっているプロダクトの不具合調査をしたりする。  Grokコンパニオンモードを使ってみた感想 Grokコンパニオンモード Ani 　iOS版のGrokのアプリにコンパニオンモードという機能が実装されて突如リリースされたというので試す。ユーザは音声・文字・画像を入力でき、それに応じてキャラクターが動いて喋ると",
+    "image": "https://assets.st-note.com/production/uploads/images/202262967/rectangle_large_type_2_c5813445593a87b3a6c1e3ed26b4f747.png?fit=bounds&quality=85&width=1280",
+    "favicon": "https://www.google.com/s2/favicons?domain=note.com&sz=64"
+  },
+  "https://arxiv.org/abs/2203.17270": {
+    "title": "BEVFormer: Learning Bird&#39;s-Eye-View Representation from Multi-Camera Images via Spatiotemporal Transformers",
+    "description": "3D visual perception tasks, including 3D detection and map segmentation based on multi-camera images, are essential for autonomous driving systems. In this work, we present a new framework termed BEVFormer, which learns unified BEV representations with spatiotemporal transformers to support multiple autonomous driving perception tasks. In a nutshell, BEVFormer exploits both spatial and temporal information by interacting with spatial and temporal space through predefined grid-shaped BEV queries. To aggregate spatial information, we design spatial cross-attention that each BEV query extracts the spatial features from the regions of interest across camera views. For temporal information, we propose temporal self-attention to recurrently fuse the history BEV information. Our approach achieves the new state-of-the-art 56.9\\% in terms of NDS metric on the nuScenes \\texttt{test} set, which is 9.0 points higher than previous best arts and on par with the performance of LiDAR-based baselines. We further show that BEVFormer remarkably improves the accuracy of velocity estimation and recall of objects under low visibility conditions. The code is available at \\url{https://github.com/zhiqi-li/BEVFormer}.",
+    "image": "/static/browse/0.3.4/images/arxiv-logo-fb.png",
+    "favicon": "https://www.google.com/s2/favicons?domain=arxiv.org&sz=64"
+  },
+  "https://mbreuss.github.io/blog_post_iclr_26_vla.html": {
+    "title": "State of VLA Research at ICLR 2026",
+    "description": "Analysis of 164 Vision-Language-Action model submissions at ICLR 2026. Learn about discrete diffusion VLAs, reasoning models, and current benchmark trends.",
+    "image": "https://mbreuss.github.io/images/blog_header.png",
+    "favicon": "https://www.google.com/s2/favicons?domain=mbreuss.github.io&sz=64"
+  }
+}

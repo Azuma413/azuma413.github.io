@@ -34,7 +34,7 @@ const About: FC = () => {
               I am a B.Eng. student at Kyoto University, expecting to graduate in March 2026. My passion lies at the intersection of AI and robotics, with a focus on developing intelligent systems that can perceive and interact with the world in complex ways.
             </p>
             <p className="text-lg text-slate-400 mb-4">
-              As a Research Intern at The University of Tokyo's Matsuo Laboratory, I developed video generation world models for autonomous driving simulators. Currently, as Co-founder & CTO of ONIXION Inc., I'm leading the development of AI-driven solutions for the manufacturing sector.
+              As a Research Intern at The University of Tokyo's Matsuo Laboratory, I developed video generation world models for autonomous driving simulators. And I was CTO of ONIXION Inc., I'm leading the development of AI-driven solutions for the manufacturing sector.
             </p>
             <p className="text-lg text-slate-400">
               I am driven by a curiosity for multimodal learning and reinforcement learning, constantly exploring how to build more capable and robust autonomous agents.

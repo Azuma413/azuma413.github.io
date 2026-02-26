@@ -10,11 +10,10 @@ npm run fetch-metadata
 npm run dev
 ```
 ## ビルド
-以下のコマンドでビルド
+以下のコマンドでビルド&更新
 ```bash
-npm run build
+./update.ps1
 ```
-生成されたdistディレクトリの中身をdistブランチにpush
 ## 編集
 Projectはcomponents/Projects.tsxに追加．
 

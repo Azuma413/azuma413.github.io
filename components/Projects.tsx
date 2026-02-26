@@ -272,22 +272,22 @@ For Sony's SSUP program, I developed a system that visualizes human momentum in 
     tags: ['Wearable', 'IMU', 'CNN', 'Real-time', 'Biomechanics', 'Sony Spresense'],
   },
 
-  //   {
-  //     slug: 'airoa-vla-competition',
-  //     title: 'AIRoA VLA Competition (Diffusion/Flow Policies)',
-  //     description: 'Implemented and evaluated advanced methods like ReinFlow and DSRL to stably train VLA policies based on Diffusion and Flow Matching.',
-  //     longDescription: `
-  // ### Overview
-  // In the AIRoA VLA Competition, I focused on training VLA models that use Diffusion or Flow Matching as their policy, which often suffer from policy collapse.
+  {
+    slug: 'airoa-vla-competition',
+    title: 'AIRoA VLA Competition (Diffusion/Flow Policies)',
+    description: 'Implemented and evaluated advanced methods like ReinFlow and DSRL to stably train VLA policies based on Diffusion and Flow Matching.',
+    longDescription: `
+  ### Overview
+  In the AIRoA VLA Competition, I focused on training VLA models that use Diffusion or Flow Matching as their policy, which often suffer from policy collapse.
 
-  // ### Key Achievements
-  // - Implemented and evaluated advanced methods like ReinFlow, which adapts DPPO for Flow Matching models by framing the denoising process as an MDP.
-  // - Worked on reproducing DSRL, a method that applies an RL framework to generative models by treating noise inputs as actions.
-  // - Gained a deep theoretical and practical understanding of how to stably train these cutting-edge models.
-  // `,
-  //     imageUrl: '/images/airoa-vla.png',
-  //     tags: ['VLA', 'Diffusion Models', 'Flow Matching', 'Reinforcement Learning', 'ReinFlow', 'DSRL'],
-  //   },
+  ### Key Achievements
+  - Implemented and evaluated advanced methods like ReinFlow, which adapts DPPO for Flow Matching models by framing the denoising process as an MDP.
+  - Worked on reproducing DSRL, a method that applies an RL framework to generative models by treating noise inputs as actions.
+  - Gained a deep theoretical and practical understanding of how to stably train these cutting-edge models.
+  `,
+    imageUrl: '/images/airoa-vla.gif',
+    tags: ['VLA', 'Diffusion Models', 'Flow Matching', 'Reinforcement Learning', 'ReinFlow', 'DSRL'],
+  },
 
   {
     slug: 'kupac-community',

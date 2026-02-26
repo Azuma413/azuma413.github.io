@@ -34,12 +34,21 @@ const Hero: FC = () => {
                     </p>
                 </AnimatedDiv>
                 <AnimatedDiv delay={400}>
-                    <a
-                        href="#projects"
-                        className="inline-block bg-slate-700 border border-slate-600 text-white font-bold py-3 px-8 rounded-full hover:bg-slate-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
-                    >
-                        View My Work
-                    </a>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a
+                            href="#projects"
+                            className="inline-block bg-slate-700 border border-slate-600 text-white font-bold py-3 px-8 rounded-full hover:bg-slate-600 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                        >
+                            View My Work
+                        </a>
+                        <a
+                            href="/CV.pdf"
+                            download="CV.pdf"
+                            className="inline-block bg-transparent border border-slate-500 text-white font-bold py-3 px-8 rounded-full hover:bg-slate-800 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                        >
+                            Download CV (PDF)
+                        </a>
+                    </div>
                 </AnimatedDiv>
             </div>
 

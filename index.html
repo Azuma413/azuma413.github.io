@@ -5,43 +5,79 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>平塚謙良 (Kaneyoshi Hiratsuka) | AI Researcher & Software Engineer</title>
+  <title>平塚謙良 (Kaneyoshi Hiratsuka) | AI Researcher</title>
   <meta name="description"
-    content="Kaneyoshi Hiratsuka is an AI Researcher and Software Engineer specializing in Robotics, Reinforcement Learning, and Multimodal Learning. Explore his projects, research, and skills." />
+    content="Kaneyoshi Hiratsuka is an AI Researcher working on Robotics, Reinforcement Learning, and Multimodal Learning. Research, projects, and writing." />
   <meta name="keywords"
-    content="Kaneyoshi Hiratsuka, AI, Robotics, Machine Learning, Reinforcement Learning, Diffusion Models, PyTorch, ROS2, Portfolio" />
+    content="Kaneyoshi Hiratsuka, AI, Robotics, Machine Learning, Reinforcement Learning, Diffusion Models, PyTorch, ROS2, Research" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Noto Sans JP"', 'sans-serif'],
-            heading: ['"Noto Sans JP"', 'sans-serif'],
-          }
+            sans: ['"Inter"', '"Noto Sans JP"', 'sans-serif'],
+            serif: ['"Noto Serif JP"', 'Georgia', '"Times New Roman"', 'serif'],
+            heading: ['"Noto Serif JP"', 'Georgia', 'serif'],
+          },
+          colors: {
+            paper: '#fcfcfb',
+            ink: {
+              DEFAULT: '#1f2937',
+              light: '#475569',
+              muted: '#6b7280',
+              faint: '#94a3b8',
+            },
+            accent: {
+              DEFAULT: '#2f4a6b',
+              hover: '#22374f',
+              soft: '#eef2f7',
+            },
+            hair: '#e7e5e4',
+          },
         }
       }
     }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&display=swap"
+    rel="stylesheet">
   <style>
+    :root {
+      --grid-line: rgba(31, 41, 55, 0.045);
+      --grid-size: 28px;
+    }
+
+    html {
+      background-color: #fcfcfb;
+      overflow-x: hidden;
+    }
+
     body {
-      font-family: 'Noto Sans JP', sans-serif;
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      color: #1f2937;
+      background-color: #fcfcfb;
+      overflow-x: hidden;
+      /* Faint notebook / graph-paper grid */
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: var(--grid-size) var(--grid-size);
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      font-family: 'Noto Sans JP', sans-serif;
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Noto Serif JP', Georgia, serif;
     }
 
+    ::selection {
+      background-color: #d6e0ec;
+    }
+
+    /* Light-theme prose for blog / detail pages */
     .prose {
-      color: #d1d5db;
+      color: #374151;
     }
 
     .prose h1,
@@ -50,37 +86,52 @@
     .prose h4,
     .prose h5,
     .prose h6 {
-      color: #f9fafb;
+      color: #1f2937;
+      font-family: 'Noto Serif JP', Georgia, serif;
     }
 
     .prose a {
-      color: #94a3b8;
+      color: #2f4a6b;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .prose a:hover {
+      color: #22374f;
     }
 
     .prose strong {
-      color: #f9fafb;
+      color: #1f2937;
     }
 
     .prose code {
-      color: #f9fafb;
-      background-color: #374151;
+      color: #1f2937;
+      background-color: #f1f0ee;
       padding: 0.2em 0.4em;
       border-radius: 0.25rem;
+      font-size: 0.9em;
     }
 
     .prose pre {
       background-color: #1f2937;
+      color: #f3f4f6;
       padding: 1em;
       border-radius: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .prose pre code {
+      color: #f3f4f6;
+      background-color: transparent;
+      padding: 0;
     }
 
     .prose blockquote {
-      color: #9ca3af;
-      border-left-color: #475569;
+      color: #6b7280;
+      border-left-color: #cbd5e1;
     }
   </style>
 
-  <link rel="stylesheet" href="/index.css">
   <script type="importmap">
 {
   "imports": {
@@ -94,11 +145,11 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-D-8mCISH.js"></script>
+  <script type="module" crossorigin src="/assets/index-HBktJ2-_.js"></script>
 </head>
 
-<body class="bg-slate-900 text-slate-300">
-  <div id="root"></div>
+<body class="bg-paper text-ink">
+  <div id="root"></div>
 </body>
 
 </html>

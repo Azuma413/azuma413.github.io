@@ -51,24 +51,25 @@ const socialLinks = [
 
 const Contact: FC = () => {
   return (
-    <section id="contact" className="py-20 lg:py-32">
+    <section id="contact" className="py-16 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedDiv>
-          <div className="max-w-3xl mx-auto text-center bg-slate-800/50 rounded-lg p-8 sm:p-12 shadow-2xl border border-slate-700">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 font-heading">
-              Connect with me
+          <div className="max-w-3xl mx-auto text-center rounded-2xl border border-hair bg-paper/95 p-8 sm:p-12 shadow-sm">
+            <h2 className="text-2xl sm:text-3xl font-bold text-ink mb-4 font-heading">
+              Get in touch
             </h2>
-            <p className="text-lg text-slate-400 mb-8">
-              I'm always open to discussing new research, projects, or collaboration opportunities. Feel free to reach out if you have any questions or just want to connect.
+            <p className="text-base sm:text-lg text-ink-light mb-8 leading-relaxed">
+              I'm always open to discussing new research, projects, or collaboration opportunities.
+              Feel free to reach out if you have any questions or just want to connect.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-slate-700/50 hover:bg-slate-600 text-white font-semibold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="flex items-center gap-2 rounded-full border border-hair bg-white px-5 py-2.5 text-sm font-semibold text-ink-light shadow-sm transition-colors hover:border-accent hover:text-accent hover:bg-accent-soft"
                 >
                   {social.icon}
                   <span>{social.name}</span>

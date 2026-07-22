@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
-// Fix: Corrected import for react-router-dom.
 import { Routes, Route } from "react-router-dom";
 import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
+import Profile from './components/Profile';
+import Research from './components/Research';
 import Projects from './components/Projects';
-import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BlogPage from './components/BlogPage';
@@ -13,9 +11,14 @@ import ProjectDetailPage from './components/ProjectDetailPage';
 
 const Home: FC = () => (
   <>
-    <Hero />
-    <About />
-    <Skills />
+    <Profile />
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <hr className="border-hair" />
+    </div>
+    <Research />
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <hr className="border-hair" />
+    </div>
     <Projects />
     <Contact />
   </>
@@ -23,7 +26,7 @@ const Home: FC = () => (
 
 const App: FC = () => {
   return (
-    <div className="min-h-screen bg-slate-900 overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden">
       <Header />
       <main className="relative z-10">
         <Routes>

@@ -11,6 +11,11 @@ node_modules
 dist
 dist-ssr
 *.local
+.env
+.env.local
+
+# Build-generated blog assets downloaded from Notion
+public/notion-assets/
 
 # Editor directories and files
 .vscode/*

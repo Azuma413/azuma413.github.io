@@ -98,9 +98,9 @@ const UrlPreviewCard: FC<{ url: string }> = ({ url }) => {
 
   if (loading) {
     return (
-      <div className="my-4 p-4 border border-slate-700 rounded-lg bg-slate-800/50 animate-pulse">
-        <div className="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
-        <div className="h-3 bg-slate-700 rounded w-1/2"></div>
+      <div className="my-4 p-4 border border-hair rounded-lg bg-white animate-pulse">
+        <div className="h-4 bg-hair rounded w-3/4 mb-2"></div>
+        <div className="h-3 bg-hair rounded w-1/2"></div>
       </div>
     );
   }
@@ -110,7 +110,7 @@ const UrlPreviewCard: FC<{ url: string }> = ({ url }) => {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block my-4 p-4 border border-slate-700 rounded-lg bg-slate-800/50 hover:bg-slate-800 hover:border-slate-500 transition-all duration-200 no-underline group"
+      className="block my-4 p-4 border border-hair rounded-lg bg-white hover:border-accent hover:bg-accent-soft transition-all duration-200 no-underline group"
     >
       <div className="flex items-start gap-3">
         {metadata?.favicon && (
@@ -124,10 +124,10 @@ const UrlPreviewCard: FC<{ url: string }> = ({ url }) => {
           />
         )}
         <div className="flex-1 min-w-0">
-          <div className="text-white font-medium mb-1 group-hover:text-slate-300 transition-colors line-clamp-2">
+          <div className="text-ink font-medium mb-1 group-hover:text-accent transition-colors line-clamp-2">
             {metadata?.title || 'Link'}
           </div>
-          <div className="text-slate-400 text-sm truncate">
+          <div className="text-ink-muted text-sm truncate">
             {metadata?.description}
           </div>
         </div>
@@ -193,37 +193,37 @@ const MarkdownRenderer: FC<MarkdownRendererProps> = ({ children }) => {
           </div>
         ),
         h1: ({ node, ...props }) => (
-          <h1 className="text-4xl font-bold mb-4 text-white font-heading" {...props} />
+          <h1 className="text-3xl font-bold mb-4 mt-8 text-ink font-heading" {...props} />
         ),
         h2: ({ node, ...props }) => (
-          <h2 className="text-3xl font-bold mb-3 text-white font-heading" {...props} />
+          <h2 className="text-2xl font-bold mb-3 mt-8 text-ink font-heading" {...props} />
         ),
         h3: ({ node, ...props }) => (
-          <h3 className="text-2xl font-bold mb-2 text-white font-heading" {...props} />
+          <h3 className="text-xl font-bold mb-2 mt-6 text-ink font-heading" {...props} />
         ),
         h4: ({ node, ...props }) => (
-          <h4 className="text-xl font-bold mb-2 text-white font-heading" {...props} />
+          <h4 className="text-lg font-bold mb-2 mt-4 text-ink font-heading" {...props} />
         ),
         h5: ({ node, ...props }) => (
-          <h5 className="text-lg font-bold mb-1 text-white font-heading" {...props} />
+          <h5 className="text-base font-bold mb-1 mt-4 text-ink font-heading" {...props} />
         ),
         h6: ({ node, ...props }) => (
-          <h6 className="text-base font-bold mb-1 text-white font-heading" {...props} />
+          <h6 className="text-base font-bold mb-1 mt-4 text-ink font-heading" {...props} />
         ),
         p: ({ node, ...props }) => (
-          <p className="mb-4 text-slate-300" {...props} />
+          <p className="mb-4 text-ink-light leading-relaxed" {...props} />
         ),
         ul: ({ node, ...props }) => (
-          <ul className="list-disc list-inside mb-4 text-slate-300 space-y-2" {...props} />
+          <ul className="list-disc list-outside pl-5 mb-4 text-ink-light space-y-2" {...props} />
         ),
         ol: ({ node, ...props }) => (
-          <ol className="list-decimal list-inside mb-4 text-slate-300 space-y-2" {...props} />
+          <ol className="list-decimal list-outside pl-5 mb-4 text-ink-light space-y-2" {...props} />
         ),
         li: ({ node, ...props }) => (
-          <li className="text-slate-300" {...props} />
+          <li className="text-ink-light" {...props} />
         ),
         blockquote: ({ node, ...props }) => (
-          <blockquote className="border-l-4 border-slate-500 pl-4 py-2 my-4 italic text-slate-400 bg-slate-800/30 [&>p]:mb-2 [&>p:last-child]:mb-0"
+          <blockquote className="border-l-4 border-hair pl-4 py-2 my-4 italic text-ink-muted bg-accent-soft/50 [&>p]:mb-2 [&>p:last-child]:mb-0"
             {...props}
           >
             {props.children}

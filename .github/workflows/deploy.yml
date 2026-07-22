@@ -1,0 +1,54 @@
+name: Build & Deploy
+
+# Rebuilds the site and publishes it to the `dist` branch (served by GitHub Pages).
+on:
+  # Push to main (code/content changes)
+  push:
+    branches: [main]
+  # Manual run — tap "Run workflow" in the GitHub mobile app after writing in Notion
+  workflow_dispatch:
+  # Periodic pull of new Notion posts (every 3 hours). Adjust or remove as you like.
+  schedule:
+    - cron: '0 */3 * * *'
+
+# Avoid overlapping deploys.
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (fetches Notion posts, then Vite build)
+        run: npm run build
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+
+      - name: Deploy to dist branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: dist
+          # SPA fallback (404.html is created by the build)
+          keep_files: false
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
+          commit_message: 'deploy: ${{ github.sha }}'

@@ -1,14 +1,15 @@
-import React, { useEffect, FC, useMemo } from 'react';
-// Fix: Corrected import for react-router-dom.
+import React, { useEffect, FC } from 'react';
 import { useParams, Link } from "react-router-dom";
 import type { Post } from '../types';
 import AnimatedDiv from './AnimatedDiv';
 import MarkdownRenderer from './MarkdownRenderer';
+// Posts authored in Notion, fetched at build time (see scripts/fetch-notion-posts.js).
+// Defaults to [] so local builds work without Notion credentials.
+import notionPosts from '../data/notion-posts.json';
 
 // Viteのimport.meta.globを使ってdocs/内のマークダウンファイルを動的に読み込む
 const markdownFiles = import.meta.glob('../docs/*.md', { eager: true, query: '?raw', import: 'default' });
 
-// シンプルなFront Matterパーサー
 interface FrontMatterResult {
     data: Record<string, string>;
     content: string;
@@ -19,14 +20,12 @@ const parseFrontMatter = (markdown: string): FrontMatterResult => {
     const match = markdown.match(frontMatterRegex);
 
     if (!match) {
-        // Front Matterがない場合は空のdataと元のcontentを返す
         return { data: {}, content: markdown };
     }
 
     const frontMatterText = match[1];
     const content = match[2];
 
-    // Front MatterをYAML風にパース（簡易版）
     const data: Record<string, string> = {};
     const lines = frontMatterText.split('\n');
 
@@ -35,10 +34,7 @@ const parseFrontMatter = (markdown: string): FrontMatterResult => {
         if (colonIndex > 0) {
             const key = line.substring(0, colonIndex).trim();
             let value = line.substring(colonIndex + 1).trim();
-
-            // クォートを削除
             value = value.replace(/^["']|["']$/g, '');
-
             data[key] = value;
         }
     }
@@ -46,23 +42,16 @@ const parseFrontMatter = (markdown: string): FrontMatterResult => {
     return { data, content };
 };
 
-// ファイルパスからslugを生成する関数
 const getSlugFromPath = (path: string): string => {
     const match = path.match(/\/([^/]+)\.md$/);
     return match ? match[1] : '';
 };
 
-// マークダウンファイルからPost配列を生成
-const posts: Post[] = Object.entries(markdownFiles).map(([path, rawContent]) => {
+// docs/*.md からPostを生成
+const markdownPosts: Post[] = Object.entries(markdownFiles).map(([path, rawContent]) => {
     const slug = getSlugFromPath(path);
-
-    // カスタムパーサーでFront Matterと本文をパース
     const { data, content } = parseFrontMatter(rawContent as string);
-
-    // Front Matterから情報を取得
     const title = data.title || 'Untitled';
-
-    // dateを取得。なければ今日の日付をフォールバック
     const date = data.date
         ? new Date(data.date).toISOString().split('T')[0]
         : new Date().toISOString().split('T')[0];
@@ -72,9 +61,21 @@ const posts: Post[] = Object.entries(markdownFiles).map(([path, rawContent]) => 
         title,
         date,
         excerpt: data.excerpt || '',
-        content: content,
+        content,
     };
-}).sort((a, b) => b.slug.localeCompare(a.slug)); // アルファベット降順でソート
+});
+
+// Notion由来の記事とマージ（slug重複時はNotionを優先）、日付降順でソート
+const buildPosts = (): Post[] => {
+    const bySlug = new Map<string, Post>();
+    for (const p of markdownPosts) bySlug.set(p.slug, p);
+    for (const p of notionPosts as Post[]) bySlug.set(p.slug, p);
+    return Array.from(bySlug.values()).sort((a, b) =>
+        a.date < b.date ? 1 : a.date > b.date ? -1 : b.slug.localeCompare(a.slug)
+    );
+};
+
+const posts: Post[] = buildPosts();
 
 const BlogPage: FC = () => {
     const { slug } = useParams<{ slug: string }>();
@@ -87,24 +88,24 @@ const BlogPage: FC = () => {
     if (slug) {
         if (!post) {
             return (
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32 text-center">
-                    <h1 className="text-4xl font-bold text-white mb-4 font-heading">Post not found</h1>
-                    <Link to="/blog" className="text-slate-400 hover:text-slate-300">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 lg:pt-32 text-center">
+                    <h1 className="text-3xl font-bold text-ink mb-4 font-heading">Post not found</h1>
+                    <Link to="/blog" className="text-accent hover:text-accent-hover">
                         &larr; Back to Blog
                     </Link>
                 </div>
             );
         }
         return (
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 lg:pt-32 lg:pb-28">
                 <AnimatedDiv>
-                    <article className="max-w-4xl mx-auto">
-                        <Link to="/blog" className="text-slate-400 hover:text-slate-300 mb-8 inline-block">
+                    <article className="max-w-3xl mx-auto">
+                        <Link to="/blog" className="text-sm text-accent hover:text-accent-hover mb-8 inline-block">
                             &larr; Back to Blog
                         </Link>
-                        <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 font-heading">{post.title}</h1>
-                        <p className="text-slate-400 mb-8">{post.date}</p>
-                        <div className="text-slate-300">
+                        <p className="text-sm text-ink-muted tabular-nums mb-2">{post.date}</p>
+                        <h1 className="text-3xl sm:text-4xl font-bold text-ink mb-8 font-heading leading-tight">{post.title}</h1>
+                        <div className="text-ink-light">
                             <MarkdownRenderer>{post.content}</MarkdownRenderer>
                         </div>
                     </article>
@@ -114,30 +115,41 @@ const BlogPage: FC = () => {
     }
 
     return (
-        <section id="blog" className="py-20 lg:py-32">
+        <section id="blog" className="pt-28 pb-20 lg:pt-32 lg:pb-28">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <AnimatedDiv>
-                    <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-12 font-heading">
-                        Blog
-                    </h2>
+                    <div className="max-w-3xl mx-auto mb-8">
+                        <h1 className="text-3xl sm:text-4xl font-bold text-ink font-heading">Blog</h1>
+                        <p className="mt-2 text-ink-muted">Notes on research, robotics, and things I'm building.</p>
+                    </div>
                 </AnimatedDiv>
-                <div className="max-w-4xl mx-auto space-y-12">
-                    {posts.map((p, index) => (
-                        <AnimatedDiv key={p.slug} delay={index * 150}>
-                            <div className="bg-slate-800/50 p-8 rounded-lg shadow-lg hover:shadow-slate-700/50 transition-all duration-300 transform hover:-translate-y-1">
-                                <h3 className="text-2xl font-bold text-white mb-2 font-heading">
-                                    <Link to={`/blog/${p.slug}`} className="hover:text-slate-300 transition-colors">
-                                        {p.title}
-                                    </Link>
-                                </h3>
-                                <p className="text-sm text-slate-500 mb-4">{p.date}</p>
-                                <p className="text-slate-400 mb-6">{p.excerpt}</p>
-                                <Link to={`/blog/${p.slug}`} className="text-slate-400 hover:text-slate-300 font-semibold">
-                                    Read more &rarr;
-                                </Link>
-                            </div>
-                        </AnimatedDiv>
-                    ))}
+                <div className="max-w-3xl mx-auto">
+                    {posts.length === 0 ? (
+                        <p className="text-ink-muted">No posts yet.</p>
+                    ) : (
+                        <ul className="border-y border-hair divide-y divide-hair">
+                            {posts.map((p, index) => (
+                                <AnimatedDiv key={p.slug} delay={index * 80}>
+                                    <li>
+                                        <Link
+                                            to={`/blog/${p.slug}`}
+                                            className="group grid grid-cols-[4rem_minmax(0,1fr)] sm:grid-cols-[8rem_minmax(0,1fr)] gap-x-4 sm:gap-x-8 px-2 sm:px-4 py-5 transition-colors hover:bg-accent-soft/70"
+                                        >
+                                            <div className="pt-1 text-sm font-semibold text-ink-muted tabular-nums">{p.date}</div>
+                                            <div className="min-w-0">
+                                                <h3 className="font-heading text-lg sm:text-xl font-semibold text-ink transition-colors group-hover:text-accent">
+                                                    {p.title}
+                                                </h3>
+                                                {p.excerpt && (
+                                                    <p className="mt-1 text-sm sm:text-base text-ink-light leading-relaxed line-clamp-2">{p.excerpt}</p>
+                                                )}
+                                            </div>
+                                        </Link>
+                                    </li>
+                                </AnimatedDiv>
+                            ))}
+                        </ul>
+                    )}
                 </div>
             </div>
         </section>

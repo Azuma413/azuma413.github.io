@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/fetch-url-metadata.js && vite build && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
-    "prebuild": "node scripts/fetch-url-metadata.js",
+    "build": "vite build && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
+    "prebuild": "node scripts/fetch-url-metadata.js && node scripts/fetch-notion-posts.js",
     "preview": "vite preview",
-    "fetch-metadata": "node scripts/fetch-url-metadata.js"
+    "fetch-metadata": "node scripts/fetch-url-metadata.js",
+    "fetch-notion": "node scripts/fetch-notion-posts.js"
   },
   "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "notion-to-md": "^3.1.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-markdown": "9.0.1",

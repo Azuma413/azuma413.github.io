@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://azuma413.github.io/sitemap.xml

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="gbOgzMa1wWrGbLrYAZq1SpwhBwtD-QqL5_ViY6jd5aI" />
+  <title>最近のVLA研究 | Kaneyoshi Hiratsuka</title>
+  <meta name="description" content="最近，自動運転でもロボットマニピュレーションでも，「VLAよりVLMをそのまま使った方が良い」という，少し面白みのない流れが来ている．" />
+  <meta name="keywords"
+    content="Kaneyoshi Hiratsuka, AI, Robotics, Machine Learning, Reinforcement Learning, Diffusion Models, PyTorch, ROS2, Research" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', '"Noto Sans JP"', 'sans-serif'],
+            serif: ['"Noto Serif JP"', 'Georgia', '"Times New Roman"', 'serif'],
+            heading: ['"Noto Serif JP"', 'Georgia', 'serif'],
+          },
+          colors: {
+            paper: '#fcfcfb',
+            ink: {
+              DEFAULT: '#1f2937',
+              light: '#475569',
+              muted: '#6b7280',
+              faint: '#94a3b8',
+            },
+            accent: {
+              DEFAULT: '#2f4a6b',
+              hover: '#22374f',
+              soft: '#eef2f7',
+            },
+            hair: '#e7e5e4',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --grid-line: rgba(31, 41, 55, 0.045);
+      --grid-size: 28px;
+    }
+
+    html {
+      background-color: #fcfcfb;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      color: #1f2937;
+      background-color: #fcfcfb;
+      overflow-x: hidden;
+      /* Faint notebook / graph-paper grid */
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: var(--grid-size) var(--grid-size);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Noto Serif JP', Georgia, serif;
+    }
+
+    ::selection {
+      background-color: #d6e0ec;
+    }
+
+    /* Light-theme prose for blog / detail pages */
+    .prose {
+      color: #374151;
+    }
+
+    .prose h1,
+    .prose h2,
+    .prose h3,
+    .prose h4,
+    .prose h5,
+    .prose h6 {
+      color: #1f2937;
+      font-family: 'Noto Serif JP', Georgia, serif;
+    }
+
+    .prose a {
+      color: #2f4a6b;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .prose a:hover {
+      color: #22374f;
+    }
+
+    .prose strong {
+      color: #1f2937;
+    }
+
+    .prose code {
+      color: #1f2937;
+      background-color: #f1f0ee;
+      padding: 0.2em 0.4em;
+      border-radius: 0.25rem;
+      font-size: 0.9em;
+    }
+
+    .prose pre {
+      background-color: #1f2937;
+      color: #f3f4f6;
+      padding: 1em;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .prose pre code {
+      color: #f3f4f6;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .prose blockquote {
+      color: #6b7280;
+      border-left-color: #cbd5e1;
+    }
+  </style>
+
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.23.1",
+    "react-markdown": "https://esm.sh/react-markdown@9.0.1",
+    "remark-gfm": "https://esm.sh/remark-gfm@4.0.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-m8_-7V1B.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BYZTj3zW.css">
+  <link rel="canonical" href="https://azuma413.github.io/blog/003/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Kaneyoshi Hiratsuka" />
+  <meta property="og:title" content="最近のVLA研究 | Kaneyoshi Hiratsuka" />
+  <meta property="og:description" content="最近，自動運転でもロボットマニピュレーションでも，「VLAよりVLMをそのまま使った方が良い」という，少し面白みのない流れが来ている．" />
+  <meta property="og:url" content="https://azuma413.github.io/blog/003/" />
+  <meta property="og:image" content="https://azuma413.github.io/images/saihouji.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="最近のVLA研究 | Kaneyoshi Hiratsuka" />
+  <meta name="twitter:description" content="最近，自動運転でもロボットマニピュレーションでも，「VLAよりVLMをそのまま使った方が良い」という，少し面白みのない流れが来ている．" />
+  <meta name="twitter:image" content="https://azuma413.github.io/images/saihouji.jpg" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"最近のVLA研究","description":"最近，自動運転でもロボットマニピュレーションでも，「VLAよりVLMをそのまま使った方が良い」という，少し面白みのない流れが来ている．","datePublished":"2025-10-24","author":{"@type":"Person","name":"Kaneyoshi Hiratsuka"},"url":"https://azuma413.github.io/blog/003/","mainEntityOfPage":"https://azuma413.github.io/blog/003/"}</script>
+</head>
+
+<body class="bg-paper text-ink">
+  <div id="root"><main style="max-width:48rem;margin:0 auto;padding:6rem 1.5rem;font-family:sans-serif"><p>2025-10-24</p><h1>最近のVLA研究</h1><div>VLMをそのまま使う流れ 最近，自動運転でもロボットマニピュレーションでも，「VLAよりVLMをそのまま使った方が良い」という，少し面白みのない流れが来ている． Action HeadやDiscrete Special Tokenすら無くし，VLMに直接制御コマンドをテキストとして出力させる方が性能が高くなるという報告もある（VLM2VLA, VLA 0）． VLAアーキテクチャ自体に致命的な欠陥があるというよりは，学習過程でVLMが破滅的忘却（catastrophic forgetting）を起こしてしまう事が問題だろう． ただし，それがアーキテクチャ由来かと問われれば，確かにそうかもしれない． 破滅的忘却を防ぐ2つの方針 よく破滅的忘却を防ぐためにはLoRAを使えば良いと言われるが，LoRA適用後のモデルの出力分布が局所最適化していたら意味がない． そこで，この問題を避けるために，現状大きく2つの方針が存在すると認識している． 1. テキストとして行動を表現する方法 VLM2VLAやVLA 0のように，数値的な行動表現ではなくテキストとしてActionを出力させる． これにより事前学習データとのギャップが縮まり，VLMの知識保持と汎化性能向上が期待できる． 2. テキストと行動の併用学習 EO 1，SimLingo，Pi0.5のように，事後学習でも行動出力とテキスト出力を同時に扱う． ある意味で素直な解決方法と言えるが，この方法だとデータの質に性能が大きく左右されてしまうのは言うまでもない． 私の考える第3のアプローチ たとえば次のような二段階学習を行えば，VLMの事前学習知識を保存できるのではないかと考えている． 1. LoRAを用いて，テキストとして行動を出力するようにVLMを微調整する． 2. 中規模のTransformerをAction Expertとして導入し，VLMを凍結した状態でVLMの潜在表現や画像特徴量をConditioningしながら，DiffusionまたはFlow Matching損失でAction Expertが連続行動を出力するよう学習する． 現在想定している，この構成のメリットは以下の通りである． VLMの汎化性能を維持できる Diffusionによってマルチモーダルな連続行動生成が可能 Action Expertは独立して学習するため，触覚・聴覚などの他モーダルの追加が容易 強化学習との統合もスムーズ（DPPOやReinFlowを参照） Waddington地形としてのVLA 最後に少し妄想的な話をしてみる． そもそも，最近のVLAの行動生成によく使われているDiffusionやFlow MatchingはEnergy Based Model (EBM) をベースとしている． ここで例として，VLAのAction ExpertをEBMで構成すれば，Action Expertはエネルギー地形として解釈することができ，VLA全体をWaddington地形のアナロジーで理解できるかもしれない． つまり，VLM出力などのConditioning要素がエネルギー地形を変形させ，その上を“球”が転がるようにして行動が決定される． このアナロジーで，生命の細胞分化の正確性やロバスト性を，VLAの行動決定メカニズムに導入できるかもしれない． 参考文献 https://mbreuss.github.io/blog post iclr 26 vla.html</div><p><a href="/blog/">Blog</a> · <a href="/">Kaneyoshi Hiratsuka</a></p></main></div>
+</body>
+
+</html>

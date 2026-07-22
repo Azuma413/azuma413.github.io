@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
+    "build": "vite build && node scripts/prerender-seo.js && node -e \"require('fs').copyFileSync('dist/index.html', 'dist/404.html')\"",
     "prebuild": "node scripts/fetch-url-metadata.js && node scripts/fetch-notion-posts.js",
     "preview": "vite preview",
     "fetch-metadata": "node scripts/fetch-url-metadata.js",
@@ -13,14 +13,17 @@
   },
   "dependencies": {
     "@notionhq/client": "^2.2.15",
+    "katex": "^0.16.11",
     "notion-to-md": "^3.1.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-markdown": "9.0.1",
     "react-router-dom": "^6.30.3",
+    "rehype-katex": "^7.0.1",
     "rehype-raw": "^7.0.0",
     "remark-breaks": "^4.0.0",
-    "remark-gfm": "4.0.0"
+    "remark-gfm": "4.0.0",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

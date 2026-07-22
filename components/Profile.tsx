@@ -1,8 +1,14 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import AnimatedDiv from './AnimatedDiv';
+import { useDocumentMeta } from './useDocumentMeta';
 
 const Profile: FC = () => {
+  useDocumentMeta(
+    '平塚謙良 (Kaneyoshi Hiratsuka) | AI Researcher',
+    'Kaneyoshi Hiratsuka — AI Researcher at Kyoto University working on robotics, reinforcement learning, multimodal perception, and world models. Research, projects, and writing.'
+  );
+
   return (
     <section id="about" className="relative">
       {/* Calm banner — Saihō-ji moss garden, Kyoto */}

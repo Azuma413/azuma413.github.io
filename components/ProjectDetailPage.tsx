@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { projectsData } from './Projects';
 import AnimatedDiv from './AnimatedDiv';
 import MarkdownRenderer from './MarkdownRenderer';
+import { useDocumentMeta } from './useDocumentMeta';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const formatDate = (date: string): string => {
@@ -19,6 +20,11 @@ const ProjectDetailPage: FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const project = projectsData.find(p => p.slug === slug);
+
+  useDocumentMeta(
+    project ? `${project.title} | Kaneyoshi Hiratsuka` : 'Not found | Kaneyoshi Hiratsuka',
+    project?.description
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);

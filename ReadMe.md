@@ -36,6 +36,31 @@ npm run build && npm run preview   # 本番ビルドの確認
 
 画像は `public/images/` に置く。
 
+`longDescription` / ブログ本文では以下が使える：
+
+- **動画**：`<iframe>`（YouTube等。レスポンシブ枠に自動整形）
+- **図/画像**：Markdown画像 or `<img>`
+- **数式（LaTeX / KaTeX）**：インライン `$E = mc^2$`、ブロック `$$ ... $$`
+
+## SEO
+
+ビルド時（`scripts/prerender-seo.js`）に、各ページの**静的HTML**を生成する：
+
+- ページ個別の `<title>` / `<meta description>` / `<link rel="canonical">` / OGP / Twitter Card
+- 構造化データ（JSON-LD：研究=ScholarlyArticle、ブログ=BlogPosting、トップ=Person）
+- JSなしでも本文が読めるフォールバック（クローラ対策。表示時はReactが置き換える）
+- `dist/sitemap.xml` と `dist/robots.txt`
+
+> サイトの公開URLは `scripts/prerender-seo.js` の `SITE` 定数（`https://azuma413.github.io`）。独自ドメインにする場合はここを変更。
+
+### 初回のみ：Google に登録
+
+1. [Google Search Console](https://search.google.com/search-console) にサイト（`https://azuma413.github.io`）を登録。
+2. 「サイトマップ」で `sitemap.xml` を送信。
+3. 主要ページ（各研究ページ）を「URL検査」→「インデックス登録をリクエスト」で早めに登録。
+
+論文名・手法名で上位表示させたい場合は、その名称を**タイトル・説明文・本文の見出し**に入れておくと効果的（例: `RSJ 2025: Audio-informed Imitation Learning` のように具体名をタイトルへ）。
+
 ### ブログ（Notion から更新）
 
 ブログ記事は Notion のデータベースで書き、ビルド時に取り込む（`scripts/fetch-notion-posts.js` → `data/notion-posts.json`）。

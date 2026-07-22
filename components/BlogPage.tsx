@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import type { Post } from '../types';
 import AnimatedDiv from './AnimatedDiv';
 import MarkdownRenderer from './MarkdownRenderer';
+import { useDocumentMeta } from './useDocumentMeta';
 // Posts authored in Notion, fetched at build time (see scripts/fetch-notion-posts.js).
 // Defaults to [] so local builds work without Notion credentials.
 import notionPosts from '../data/notion-posts.json';
@@ -80,6 +81,15 @@ const posts: Post[] = buildPosts();
 const BlogPage: FC = () => {
     const { slug } = useParams<{ slug: string }>();
     const post = slug ? posts.find(p => p.slug === slug) : null;
+
+    useDocumentMeta(
+        slug
+            ? `${post ? post.title : 'Post not found'} | Kaneyoshi Hiratsuka`
+            : 'Blog | Kaneyoshi Hiratsuka',
+        slug
+            ? post?.excerpt || undefined
+            : "Notes on research, robotics, and things I'm building — by Kaneyoshi Hiratsuka."
+    );
 
     useEffect(() => {
         window.scrollTo(0, 0);

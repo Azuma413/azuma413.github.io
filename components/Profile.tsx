@@ -114,6 +114,19 @@ const Profile: FC = () => {
                   (一般社団法人次世代フィジカルAI育成機構), a non-profit growing an open Physical AI
                   ecosystem.
                 </p>
+                <p>
+                  Earlier, I was Co-founder &amp; CTO of{' '}
+                  <a
+                    href="https://onixion.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent underline underline-offset-2 hover:text-accent-hover"
+                  >
+                    ONIXION Inc.
+                  </a>
+                  , where I led the development of AI agents for the manufacturing industry. I have
+                  since stepped down and am no longer involved in the company.
+                </p>
                 <p className="text-ink-muted">
                   The ultimate goal, of course, is a maid robot. Everything above is just the
                   research programme required to get there. 🤖🧹

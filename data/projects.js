@@ -79,7 +79,7 @@ Co-authors: Ryosuke Kojima (Kyoto University, RIKEN), Benjamin Yen (RIKEN, Insti
   {
     slug: 'matsuo-institute-vla',
     category: 'project',
-    date: '2025',
+    date: '2025-12',
     venue: 'Matsuo Lab',
     title: 'Matsuo Institute: VLA for Autonomous Driving',
     description: 'Engaged in closed-loop autonomous driving verification and model refinement in CARLA, building upon Simlingo and OpenEMMA.',
@@ -183,7 +183,7 @@ This research proposed a new task called "Acoustic-Informed Pick-and-Place," whe
   {
     slug: 'video-world-models',
     category: 'project',
-    date: '2024',
+    date: '2024-09',
     venue: 'Matsuo Lab · Internship',
     title: 'Video Generation World Models',
     description: 'Developed and optimized Transformer-Diffusion models for autonomous driving simulators at Matsuo Institute.',
@@ -196,6 +196,11 @@ During my internship, I helped develop video generation world models (combining 
 - **Prevented VQ Collapse:** Implemented the "rotation trick" as an alternative to STE, which redefines gradient flow during quantization to ensure more balanced codebook use and richer representations.
 - **Awarded "Best Poster"** at an internal research presentation for this work.
 - Currently involved in a new project to develop a VLA for autonomous driving based on the Simlingo architecture.
+
+### Award
+最優秀賞 (Best Poster Award) — 松尾・岩澤研究室主催 ポスターDay, The University of Tokyo, 25 September 2024, for 「自動運転のための世界モデル構築」 (Building World Models for Autonomous Driving).
+
+![Best Poster Award certificate](/images/best-poster-award.jpg)
 `,
     imageUrl: '/images/gaia_diffusion.png',
     tags: ['Diffusion Models', 'Transformers', 'World Models', 'Autonomous Driving', 'Generative AI'],
@@ -204,7 +209,7 @@ During my internship, I helped develop video generation world models (combining 
   {
     slug: 'sound-source-tracking',
     category: 'research',
-    date: '2024',
+    date: '2024-07',
     venue: 'JSAI SIG-Challenge 2024',
     title: 'JSAI SIGAI 2024: Sound Source Tracking with World Models',
     description: 'Developed a robot with a microphone array that uses a DreamerV3 world model to track sound sources in vision-denied scenarios.',
@@ -229,7 +234,7 @@ Paper: [https://www.jstage.jst.go.jp/article/jsaisigtwo/2024/Challenge-066/2024_
   {
     slug: 'sim2real-drq-v2',
     category: 'project',
-    date: '2024',
+    date: '2024-11',
     venue: 'KaiRA Journal vol.8',
     title: 'Sim2Real RL for Line-Following Robot',
     description: 'Trained a vision-based RL policy (DrQ-v2) in simulation and achieved zero-shot transfer to a real Raspberry Pi-based robot.',
@@ -253,32 +258,52 @@ Also featured in KaiRA Journal vol.8: [https://kyoto-kaira.github.io/works/colle
   {
     slug: 'kyoto-univ-nf-act',
     category: 'project',
-    date: '2024-11',
+    date: '2025-11',
     venue: 'Kyoto Univ NF',
-    title: 'Kyoto University NF: Imitation Learning Demo',
-    description: 'Exhibited an imitation learning demonstration using Action Chunking with Transformer (ACT) on a custom open-source robot manipulator, ILOHA.',
+    title: 'Kyoto University NF: Imitation Learning Demo with a Self-Built ALOHA',
+    description:
+      'Built an ALOHA-compatible bimanual manipulator on a student budget, collected demonstrations by teleoperating it from a Meta Quest 3, trained an ACT policy, and ran it live at the Kyoto University November Festival.',
     longDescription: `
 ### Overview
-At the Kyoto University November Festival (NF), I showcased an imitation learning demonstration using a custom-built, open-source robot manipulator named ILOHA.
+An ALOHA costs millions of yen, which is not a student budget. So we built **ILOHA** — an ALOHA-compatible bimanual manipulator — designed the data-collection pipeline around a Meta Quest 3, trained an [ACT](https://tonyzhaozh.github.io/aloha/) policy on what we recorded, and demonstrated it live at the Kyoto University November Festival (NF).
 
-### Key Highlights
-- Implemented and demonstrated an Action Chunking with Transformer (ACT) model on the physical robot.
-- Showcased the robot's ability to perform complex, learned manipulation tasks autonomously to public audiences.
+### The robot: a hybrid actuator layout
+The cost of an ALOHA is dominated by its actuators, but not every joint needs the same one:
 
-### Technical Details & Demo
+- **Wrist / distal joints — Dynamixel.** These sit inside the camera's field of view, and how they look genuinely matters to a vision-based policy, so we kept the standard part here.
+- **Base / proximal joints — QDD motors (Robstride).** These are barely visible in the observations, so a much cheaper actuator does the job.
+
+The result stays faithful to the reference design where the policy can see it, and saves money where it cannot.
+
+### Data collection: teleoperation from a Quest 3
+Rather than build a leader arm, we teleoperate from a Meta Quest 3:
+
+- Controller pose → **inverse kinematics** → target joint angles, sent to the robot through a PC.
+- A RealSense camera records images synchronized with the robot state, in the format the **LeRobot** library expects — so recorded data flows into training with no conversion step.
+
+Getting this stable took more work than the IK itself:
+
+- **Gimbal lock** near singular poses was handled with a singularity-avoidance step on the Quest side.
+- **Runaway motion** was prevented on the PC side with angle unwrapping, per-step relative motion limits, and exponential smoothing of the commands.
+- **Packet loss** turned out to be the real enemy. Swapping the mobile router for a Wi-Fi 6 router fixed the dropouts that were corrupting control signals — a recurring theme in this kind of work: the network, not the algorithm.
+
+### Result
+The trained ACT policy reliably picked up a snack and placed it in a box, and ran autonomously in front of a public audience for the length of the festival.
+
+### Technical Details
 - **Qiita Article:** [Read the detailed technical write-up on Qiita](https://qiita.com/hirekatsu0523/items/0b850d63bb9c7182e2fb)
 
 ### YouTube Demo
 <iframe width="890" height="509" src="https://www.youtube.com/embed/rdS3Xbs53qA" title="Kyoto Univ NF ILOHA Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 `,
     imageUrl: '/images/nf.png',
-    tags: ['Robotics', 'Imitation Learning', 'ACT', 'Open Source', 'ILOHA'],
+    tags: ['Robotics', 'Imitation Learning', 'ACT', 'Teleoperation', 'Meta Quest 3', 'LeRobot', 'ILOHA'],
   },
 
   {
     slug: 'nhk-robocon-2024',
     category: 'project',
-    date: '2024',
+    date: '2024-04',
     venue: 'NHK Robocon',
     title: 'NHK Robocon 2024 Software Lead',
     description: 'Led the software team to build an autonomous mobile robot, developing a modular task architecture with Behavior Trees and ROS, and a 3D perception system.',
@@ -289,6 +314,9 @@ As the Software Lead for Kyoto University's NHK Robocon 2024 team, I spearheaded
 ### Key Technologies
 - **3D Perception & Pose Estimation:** Developed a system combining a YOLO model with a depth camera to compute the precise 3D global coordinates of objects.
 - **Modular Task Execution:** Implemented a scalable architecture using Behavior Trees (instead of hard-coded logic) combined with async communication in ROS for modular task development and debugging.
+
+### YouTube Demo
+<iframe width="890" height="509" src="https://www.youtube.com/embed/1SvK_JmMgQU" title="NHK学生ロボコン2024" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 `,
     imageUrl: '/images/nhk2024_ros.png',
     tags: ['Robotics', 'ROS', 'Behavior Trees', 'Computer Vision', 'YOLO'],
@@ -297,7 +325,7 @@ As the Software Lead for Kyoto University's NHK Robocon 2024 team, I spearheaded
   {
     slug: 'catch-robo-2025',
     category: 'project',
-    date: '2025',
+    date: '2025-09',
     venue: 'Catch Robo',
     title: 'Catch Robo 2025: MR Teleoperation System',
     description: 'Developed a low-cost, intuitive teleoperation system for a 6-axis arm using a Meta Quest 3 and inverse kinematics.',
@@ -321,24 +349,44 @@ For the 2025 Catch Robo contest, my friends and I developed a custom 6-axis mani
   {
     slug: 'ai-debate-stream',
     category: 'project',
-    date: '2023',
+    // NOTE: was '2023', but the write-up uses gemini-2.0-flash-thinking-exp
+    // (released Dec 2024), so the entry has been moved to 2025. Adjust if wrong.
+    date: '2025-02',
     venue: 'Personal Project',
-    title: 'LLM-Powered AI Debate Streaming System',
-    description: 'Developed a YouTube streaming system where two AI agents debate topics, connecting LLM outputs to embodied animations in Unity.',
+    title: 'AI Vtuber: A Multi-Agent LLM Debate Streaming System',
+    description:
+      'A live YouTube streaming system in which several LLM agents search the web in real time and debate a topic against each other, embodied as Unity avatars and steered by viewer comments.',
     longDescription: `
 ### Overview
-To explore the capabilities of Large Language Models, I developed a YouTube streaming system featuring two AI agents debating topics provided by the audience.
+A single LLM answering a question sounds authoritative whether or not it is right — hallucinations are hard to notice precisely because nothing contradicts them. This project takes the opposite approach: instead of one assistant handing down an answer, several agents are given **opposing positions and made to argue**, live, while the audience watches and joins in. The friction between them is the point; it gives a viewer a handle for scrutinizing the claims themselves.
 
-### Key Innovation
-- The core innovation was connecting the LLM's text output to non-verbal, embodied expressions.
-- The LLM was prompted to generate both text and a corresponding "emotion" or "action" label.
-- A system in Unity received this label and triggered a matching animation for the character model, creating the appearance of emotions and personalities.
+The result is an AI Vtuber debate stream on YouTube: agents collect information from the live web, argue in character, and respond to viewer comments in real time.
+
+### Backend
+- **LLM** — Gemini API on Vertex AI, using \`gemini-2.0-flash-thinking-exp\` where extra reasoning helps.
+- **Agent orchestration** — [LangGraph](https://langchain-ai.github.io/langgraph/), so the debate flow (research → statement → rebuttal → summary) is an explicit graph rather than one long prompt.
+- **Live information gathering** — \`browser-use\` drives a real Chrome instance, so an agent can go look something up mid-debate instead of relying on its training data.
+- **Memory** — past utterances are embedded into ChromaDB and retrieved (RAG) so agents stay consistent with what they already argued.
+- **Infrastructure** — the GPU-bound parts run on GCE; the UI runs locally. Splitting it this way keeps the interface responsive and the cloud bill bounded.
+
+### Frontend & streaming
+- **Unity** drives the avatars — expression and gesture animations are triggered from the agent output, so the debate reads as embodied rather than as a wall of subtitles.
+- **AivisSpeech** for speech synthesis, with lip-sync driven by the audio.
+- **WebSocket** carries comments and utterances; **WebRTC** shares the agent's browser screen so viewers can see what it is reading.
+- **OBS Studio** composites everything and pushes it to a YouTube live stream — which conveniently makes the audience size somebody else's scaling problem.
+
+### Things I liked building
+- **Comment clustering.** Viewer comments are sentence-embedded and projected to 2D with UMAP, so the chat becomes a visible map of opinion instead of a scrolling wall. Euclidean distance in that space can even be used to judge which side of the debate the audience drifted toward.
+- **Tunable personalities.** Each agent's system prompt is a parameter, so the same machinery can be dialled from a rigorous logical debate to pure entertainment.
+
+### Write-up
+[マルチエージェントによるディベート配信システムを作った話 (Zenn)](https://zenn.dev/hirekatsu0523/articles/8b0583ba9a01f6)
 
 ### YouTube Demo
 <iframe width="890" height="509" src="https://www.youtube.com/embed/zS5Wg6DVSHs" title="AI Vtuber ディベート" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 `,
     imageUrl: '/images/ai-debate-unity.png',
-    tags: ['LLM', 'Embodied AI', 'Unity', 'Generative AI', 'Character Animation'],
+    tags: ['LLM', 'Multi-Agent', 'LangGraph', 'RAG', 'Unity', 'Embodied AI', 'Live Streaming'],
   },
 
   {
@@ -366,7 +414,7 @@ A friend and I were selected for the METI NEP grant program for our project, "Au
   {
     slug: 'sony-ssup-momentum',
     category: 'project',
-    date: '2024',
+    date: '2025-03',
     venue: 'Sony SSUP',
     title: 'Sony SSUP: Real-time Momentum Visualization',
     description: 'Developed a system for Sony SSUP that visualizes human momentum in real-time using IMUs, a lightweight CNN, and a biomechanical model.',
@@ -389,7 +437,7 @@ For Sony's SSUP program, I developed a system that visualizes human momentum in 
   {
     slug: 'airoa-vla-competition',
     category: 'project',
-    date: '2025',
+    date: '2025-09',
     venue: 'AIRoA Competition',
     title: 'AIRoA VLA Competition (Diffusion/Flow Policies)',
     description: 'Implemented and evaluated advanced methods like ReinFlow and DSRL to stably train VLA policies based on Diffusion and Flow Matching.',
@@ -404,29 +452,6 @@ For Sony's SSUP program, I developed a system that visualizes human momentum in 
   `,
     imageUrl: '/images/airoa-vla.gif',
     tags: ['VLA', 'Diffusion Models', 'Flow Matching', 'Reinforcement Learning', 'ReinFlow', 'DSRL'],
-  },
-
-  {
-    slug: 'kupac-community',
-    category: 'project',
-    date: '2025',
-    venue: 'Community',
-    title: 'KUPAC - Kyoto University Physical AI Community',
-    description: 'Co-founded and organized KUPAC, a new student community for physical AI, and ran a hands-on workshop on imitation learning (ACT).',
-    longDescription: `
-### Overview
-I realized Kyoto University lacked a student community specializing in physical AI. To fill that gap, I worked with Assistant Professor Yagi and friends to start KUPAC.
-
-### Key Activities
-- As an organizer, I planned and ran a hands-on workshop on pick-and-place using the ACT imitation learning model.
-- Participants went through the entire pipeline: data collection, model training, and deployment.
-- This activity is focused on contributing to our shared knowledge and building the community.
-
-### Hands-on Workshop Demo
-<iframe width="812" height="461" src="https://www.youtube.com/embed/ZGUetN6ywjc" title="ACT Attention可視化" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-`,
-    imageUrl: '/images/kupac-workshop.png',
-    tags: ['Community Building', 'Leadership', 'Imitation Learning', 'ACT', 'Workshop'],
   },
 
   {
@@ -459,19 +484,25 @@ Programme page: [kakusei.aist.go.jp/r8](https://kakusei.aist.go.jp/r8/)
   {
     slug: 'sushi-tech-tokyo-2026',
     category: 'project',
-    date: '2026',
+    date: '2026-04',
     venue: 'SusHi Tech Tokyo',
     title: 'SusHi Tech Tokyo 2026: Cloth-Folding VLA on a Self-Built Bimanual Robot',
     description:
       'Exhibited a handkerchief-folding demo at SusHi Tech Tokyo 2026 with KUPAC, running a fine-tuned X-VLA policy on ILOHA, our self-built bimanual robot.',
     longDescription: `
 ### Overview
-With [KUPAC](/projects/kupac-community), the student-led Physical AI community at Kyoto University, we exhibited a **cloth-folding demonstration** at SusHi Tech Tokyo 2026, running a Vision-Language-Action policy on **ILOHA** — the open-source bimanual manipulator we build ourselves.
+With [KUPAC](https://www.kupac.org/ja/), the student-led Physical AI community at Kyoto University, we exhibited a **cloth-folding demonstration** at SusHi Tech Tokyo 2026, running a Vision-Language-Action policy on **ILOHA** — the open-source bimanual manipulator we build ourselves.
+
+### Summary Movie
+<iframe width="890" height="509" src="https://www.youtube.com/embed/mP7oChvzbms" title="SusHi Tech Tokyo 2026 サマリームービー" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### What we did
 - Collected roughly **300 teleoperated episodes** of handkerchief folding.
 - Compared candidate VLA models and settled on **X-VLA**, fine-tuned on a dataset in which high- and low-quality demonstrations carry an explicit quality label.
 - On site, the lighting, background, and camera angles differed enough from our lab that the policy degraded. We collected **50 extra episodes at the venue** and re-fine-tuned for 3.5 hours, taking the success rate from roughly 60% to over 90%.
+
+### The Robot in Action
+<iframe width="890" height="509" src="https://www.youtube.com/embed/pBRmm-Ko0Rc" title="SusHi Tech Tokyo 2026 実機デモ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ### Lesson learned
 The bottleneck was not the model. Cable reliability and USB bandwidth were what actually limited the demo — a reminder that in Physical AI the hardware plumbing decides how much of your policy the audience ever gets to see.

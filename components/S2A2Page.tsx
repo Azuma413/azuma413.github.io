@@ -187,6 +187,25 @@ const S2A2Page: FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedDiv delay={100}>
           <article className="mx-auto mt-12 max-w-4xl text-base leading-relaxed text-ink-light sm:text-lg">
+            <figure className="my-8">
+              <div className="relative w-full overflow-hidden rounded-xl border border-hair shadow-sm" style={{ paddingBottom: '56.25%' }}>
+                <iframe
+                  src="https://www.youtube.com/embed/jfUMjmGBMm4"
+                  title="S2A2: Audio-Visual Imitation Learning for Manipulation Tasks Using Acoustic Spatial Information"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="absolute inset-0 h-full w-full"
+                />
+              </div>
+              <figcaption className="mt-3 text-sm leading-relaxed text-ink-muted">
+                <strong className="text-ink">Video overview.</strong> A walkthrough of the
+                acoustic-aware manipulation tasks, the S2A2 framework, and the simulation and
+                real-robot results.
+              </figcaption>
+            </figure>
+
             <Figure
               src="/images/s2a2/overview.jpg"
               alt="Overview of the S2A2 framework"

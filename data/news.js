@@ -9,7 +9,8 @@
 //   title : one short line. Required.
 //   href  : optional link. External URLs open in a new tab; internal paths
 //           ('/projects/...') navigate inside the site.
-//   image : optional thumbnail shown at the end of the row (public/ path).
+//   image : optional photo. The row opens it full-screen in a lightbox.
+//           Ignored when `href` is set — a link always wins.
 
 /** Only the newest N items are rendered; older entries stay here as an archive. */
 export const MAX_NEWS_ITEMS = 10;
@@ -17,8 +18,14 @@ export const MAX_NEWS_ITEMS = 10;
 export const newsData = [
   {
     date: '2026-07-11',
-    title: '関西若手交流会 — Gave a talk on imitation learning for manipulation (ACT).',
+    title: '関西フィジカル AI若手交流会 — Gave a talk on imitation learning and robot audition.',
     image: '/images/news/kansai-wakate-2026.jpg',
+  },
+  {
+    date: '2026-03-23',
+    title:
+      'Graduated from the Department of Physics and Engineering (物理工学科), Faculty of Engineering, Kyoto University — B.Eng.',
+    image: '/images/news/kyoto-u-degree.jpg',
   },
   {
     date: '2026-02-18',

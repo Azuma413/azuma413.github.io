@@ -6,8 +6,8 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="gbOgzMa1wWrGbLrYAZq1SpwhBwtD-QqL5_ViY6jd5aI" />
-  <title>LLM-Powered AI Debate Streaming System | Kaneyoshi Hiratsuka</title>
-  <meta name="description" content="Developed a YouTube streaming system where two AI agents debate topics, connecting LLM outputs to embodied animations in Unity." />
+  <title>AI Vtuber: A Multi-Agent LLM Debate Streaming System | Kaneyoshi Hiratsuka</title>
+  <meta name="description" content="A live YouTube streaming system in which several LLM agents search the web in real time and debate a topic against each other, embodied as Unity avatars and steered by viewer comments." />
   <meta name="keywords"
     content="Kaneyoshi Hiratsuka, AI, Robotics, Machine Learning, Reinforcement Learning, Diffusion Models, PyTorch, ROS2, Research" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -145,24 +145,24 @@
   }
 }
 </script>
-  <script type="module" crossorigin src="/assets/index-D49w6kk5.js"></script>
+  <script type="module" crossorigin src="/assets/index-DPevS3fc.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-BYZTj3zW.css">
   <link rel="canonical" href="https://azuma413.github.io/projects/ai-debate-stream/" />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Kaneyoshi Hiratsuka" />
-  <meta property="og:title" content="LLM-Powered AI Debate Streaming System | Kaneyoshi Hiratsuka" />
-  <meta property="og:description" content="Developed a YouTube streaming system where two AI agents debate topics, connecting LLM outputs to embodied animations in Unity." />
+  <meta property="og:title" content="AI Vtuber: A Multi-Agent LLM Debate Streaming System | Kaneyoshi Hiratsuka" />
+  <meta property="og:description" content="A live YouTube streaming system in which several LLM agents search the web in real time and debate a topic against each other, embodied as Unity avatars and steered by viewer comments." />
   <meta property="og:url" content="https://azuma413.github.io/projects/ai-debate-stream/" />
   <meta property="og:image" content="https://azuma413.github.io/images/ai-debate-unity.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="LLM-Powered AI Debate Streaming System | Kaneyoshi Hiratsuka" />
-  <meta name="twitter:description" content="Developed a YouTube streaming system where two AI agents debate topics, connecting LLM outputs to embodied animations in Unity." />
+  <meta name="twitter:title" content="AI Vtuber: A Multi-Agent LLM Debate Streaming System | Kaneyoshi Hiratsuka" />
+  <meta name="twitter:description" content="A live YouTube streaming system in which several LLM agents search the web in real time and debate a topic against each other, embodied as Unity avatars and steered by viewer comments." />
   <meta name="twitter:image" content="https://azuma413.github.io/images/ai-debate-unity.png" />
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","headline":"LLM-Powered AI Debate Streaming System","name":"LLM-Powered AI Debate Streaming System","description":"Developed a YouTube streaming system where two AI agents debate topics, connecting LLM outputs to embodied animations in Unity.","keywords":"LLM, Embodied AI, Unity, Generative AI, Character Animation","author":{"@type":"Person","name":"Kaneyoshi Hiratsuka"},"datePublished":"2023","url":"https://azuma413.github.io/projects/ai-debate-stream/","publisher":{"@type":"Organization","name":"Personal Project"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"CreativeWork","headline":"AI Vtuber: A Multi-Agent LLM Debate Streaming System","name":"AI Vtuber: A Multi-Agent LLM Debate Streaming System","description":"A live YouTube streaming system in which several LLM agents search the web in real time and debate a topic against each other, embodied as Unity avatars and steered by viewer comments.","keywords":"LLM, Multi-Agent, LangGraph, RAG, Unity, Embodied AI, Live Streaming","author":{"@type":"Person","name":"Kaneyoshi Hiratsuka"},"datePublished":"2025-02","url":"https://azuma413.github.io/projects/ai-debate-stream/","publisher":{"@type":"Organization","name":"Personal Project"}}</script>
 </head>
 
 <body class="bg-paper text-ink">
-  <div id="root"><main style="max-width:48rem;margin:0 auto;padding:6rem 1.5rem;font-family:sans-serif"><p>Project · Personal Project · 2023</p><h1>LLM-Powered AI Debate Streaming System</h1><p>Developed a YouTube streaming system where two AI agents debate topics, connecting LLM outputs to embodied animations in Unity.</p><div>Overview To explore the capabilities of Large Language Models, I developed a YouTube streaming system featuring two AI agents debating topics provided by the audience. Key Innovation The core innovation was connecting the LLM's text output to non verbal, embodied expressions. The LLM was prompted to generate both text and a corresponding &quot;emotion&quot; or &quot;action&quot; label. A system in Unity received this label and triggered a matching animation for the character model, creating the appearance of emotions and personalities. YouTube Demo</div><p>#LLM #Embodied AI #Unity #Generative AI #Character Animation</p><p><a href="/">Kaneyoshi Hiratsuka</a></p></main></div>
+  <div id="root"><main style="max-width:48rem;margin:0 auto;padding:6rem 1.5rem;font-family:sans-serif"><p>Project · Personal Project · 2025-02</p><h1>AI Vtuber: A Multi-Agent LLM Debate Streaming System</h1><p>A live YouTube streaming system in which several LLM agents search the web in real time and debate a topic against each other, embodied as Unity avatars and steered by viewer comments.</p><div>Overview A single LLM answering a question sounds authoritative whether or not it is right — hallucinations are hard to notice precisely because nothing contradicts them. This project takes the opposite approach: instead of one assistant handing down an answer, several agents are given opposing positions and made to argue , live, while the audience watches and joins in. The friction between them is the point; it gives a viewer a handle for scrutinizing the claims themselves. The result is an AI Vtuber debate stream on YouTube: agents collect information from the live web, argue in character, and respond to viewer comments in real time. Backend LLM — Gemini API on Vertex AI, using gemini 2.0 flash thinking exp where extra reasoning helps. Agent orchestration — LangGraph, so the debate flow (research → statement → rebuttal → summary) is an explicit graph rather than one long prompt. Live information gathering — browser use drives a real Chrome instance, so an agent can go look something up mid debate instead of relying on its training data. Memory — past utterances are embedded into ChromaDB and retrieved (RAG) so agents stay consistent with what they already argued. Infrastructure — the GPU bound parts run on GCE; the UI runs locally. Splitting it this way keeps the interface responsive and the cloud bill bounded. Frontend &amp; streaming Unity drives the avatars — expression and gesture animations are triggered from the agent output, so the debate reads as embodied rather than as a wall of subtitles. AivisSpeech for speech synthesis, with lip sync driven by the audio. WebSocke…</div><p>#LLM #Multi-Agent #LangGraph #RAG #Unity #Embodied AI #Live Streaming</p><p><a href="/">Kaneyoshi Hiratsuka</a></p></main></div>
 </body>
 
 </html>

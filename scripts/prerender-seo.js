@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync } from 
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { projectsData } from '../data/projects.js';
+import { latestNews } from '../data/news.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
@@ -107,11 +108,23 @@ function addSitemap(path, lastmod) {
 // Home
 {
   const description =
-    'Kaneyoshi Hiratsuka — AI Researcher at Kyoto University working on robotics, reinforcement learning, multimodal perception, and world models. Research, projects, and writing.';
+    "Kaneyoshi Hiratsuka — master's student in the Learning Machines group, Graduate School of Informatics, Kyoto University. Reinforcement learning, imitation learning, robot foundation models, robot audition, and differentiable simulators.";
+  const newsHtml = latestNews.length
+    ? `<h2>News</h2><ul>` +
+      latestNews
+        .map(
+          (n) =>
+            `<li>${escHtml(n.date)} — ` +
+            (n.href ? `<a href="${escHtml(n.href)}">${escHtml(n.title)}</a>` : escHtml(n.title)) +
+            `</li>`
+        )
+        .join('') +
+      `</ul>`
+    : '';
   const fallback =
     `<main style="max-width:48rem;margin:0 auto;padding:6rem 1.5rem;font-family:sans-serif">` +
     `<h1>${escHtml(AUTHOR)} (平塚 謙良)</h1><p>AI Researcher, Kyoto University.</p>` +
-    `<p>${escHtml(description)}</p></main>`;
+    `<p>${escHtml(description)}</p>${newsHtml}</main>`;
   const jsonld = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -120,7 +133,15 @@ function addSitemap(path, lastmod) {
     url: SITE + '/',
     jobTitle: 'AI Researcher',
     affiliation: { '@type': 'CollegeOrUniversity', name: 'Kyoto University' },
-    knowsAbout: ['Robotics', 'Reinforcement Learning', 'Multimodal Learning', 'World Models', 'Vision-Language-Action Models'],
+    knowsAbout: [
+      'Robotics',
+      'Reinforcement Learning',
+      'Imitation Learning',
+      'Robot Foundation Models',
+      'Robot Audition',
+      'Differentiable Simulation',
+      'Vision-Language-Action Models',
+    ],
     sameAs: [
       'https://github.com/Azuma413',
       'https://x.com/hirekatsu0523',

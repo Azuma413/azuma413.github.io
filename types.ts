@@ -20,6 +20,17 @@ export interface Project {
   sourceUrl?: string;
 }
 
+export interface NewsItem {
+  /** ISO-ish date ("YYYY-MM" or "YYYY-MM-DD"). The list sorts on this. */
+  date: string;
+  /** One short line. */
+  title: string;
+  /** Optional link — external URL or internal path ("/projects/..."). */
+  href?: string;
+  /** Optional thumbnail (path under public/). */
+  image?: string;
+}
+
 export interface Skill {
   name: string;
   icon: ReactNode;

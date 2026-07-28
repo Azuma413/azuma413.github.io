@@ -27,3 +27,5 @@ public/notion-assets/
 *.njsproj
 *.sln
 *.sw?
+
+tmp/

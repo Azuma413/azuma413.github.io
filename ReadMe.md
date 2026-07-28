@@ -17,11 +17,26 @@ npm run build && npm run preview   # 本番ビルドの確認
 
 ## 構成
 
-- トップは1ページ縦スクロール：`Profile`（名前＋About）→ `Research` → `Projects & Activities` → `Contact`。
+- トップは1ページ縦スクロール：`Profile`（名前＋About）→ `News` → `Research` → `Projects & Activities` → `Contact`。
 - Research と Projects は一覧（日付・タイトル・タグ）で表示し、クリックで個別ページ（`/projects/:slug`）へ。
 - ブログは `/blog`。
 
 ## 編集方法
+
+### News
+
+`data/news.js` の `newsData` 配列に追記する。順番は気にしなくてよい（日付の降順に並び替えられる）。
+
+```js
+{
+  date: '2026-07-11',      // 'YYYY-MM-DD' または 'YYYY-MM'（必須）
+  title: '一行の短い文',    // 必須
+  href: 'https://...',     // 任意。外部URLは別タブ、'/projects/...' はサイト内遷移
+  image: '/images/news/xxx.jpg', // 任意。行末に小さいサムネイルが出る
+}
+```
+
+**掲載は新しい順に最大10件**（`MAX_NEWS_ITEMS`）。11件目以降は配列に残っていても表示されない（＝アーカイブとして残しておける）。
 
 ### Research / Projects
 
@@ -35,6 +50,15 @@ npm run build && npm run preview   # 本番ビルドの確認
 > 現在の `date` / `venue` は暫定値。正式な一覧が決まったらここを差し替えるだけでよい。
 
 画像は `public/images/` に置く。
+
+#### 専用ページを持つ項目
+
+論文プロジェクトページのように作り込みたい項目は、Markdown ではなく専用コンポーネントで描画する。
+現状 **S2A2**（`/projects/s2a2` → `components/S2A2Page.tsx`）がこの方式。
+
+- `App.tsx` で `/projects/:slug` より **前** に静的パスのルートを追加する。
+- `data/projects.js` のエントリは残しておく（Research 一覧の行と、ビルド時 SEO 用の本文になる）。
+  そのため `longDescription` には Abstract 等の要約テキストを入れておくこと。
 
 `longDescription` / ブログ本文では以下が使える：
 

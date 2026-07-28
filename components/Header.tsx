@@ -9,6 +9,7 @@ const Header: FC = () => {
 
   const navLinks = [
     { href: '/#about', label: 'About', section: 'about' },
+    { href: '/#news', label: 'News', section: 'news' },
     { href: '/#research', label: 'Research', section: 'research' },
     { href: '/#projects', label: 'Projects', section: 'projects' },
     { href: '/blog', label: 'Blog', section: null },

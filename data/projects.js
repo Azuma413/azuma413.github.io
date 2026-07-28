@@ -7,8 +7,78 @@
 
 export const projectsData = [
   {
-    slug: 'matsuo-institute-vla',
+    slug: 's2a2',
     category: 'research',
+    date: '2026-07',
+    title: 'S2A2: Audio-Visual Imitation Learning for Manipulation Tasks Using Acoustic Spatial Information',
+    description:
+      'A multimodal imitation learning framework that fuses acoustic spatial maps and spotformed spectrograms with vision, plus a new suite of acoustic-aware manipulation tasks.',
+    // NOTE: /projects/s2a2 is rendered by components/S2A2Page.tsx (a dedicated
+    // paper-style page), not by the generic Markdown detail page. This
+    // longDescription is what the build-time SEO prerender indexes.
+    longDescription: `
+### Abstract
+Acoustic information provides rich cues about object location, material properties, and changes caused by contact or motion. This work introduces a new set of **acoustic-aware manipulation tasks** for imitation learning, in which a robot must use auditory cues to determine what to manipulate and where to put it. These tasks require sound source localization and identification for active exploration in robotic manipulation.
+
+We propose **Spatial-Spectral Audio Action (S2A2)**, a multimodal imitation learning framework that integrates visual features with acoustic *spatial* information (an acoustic spatial map computed with MUSIC over multiple microphone arrays) and acoustic *signal* information (a spectrogram extracted by Spotforming). S2A2 is implemented on top of four policies — ACT, Diffusion Policy, VQ-BeT, and $\\pi_0$. Simulation experiments show that the full framework is the most effective for tasks that require both position and timbre, and real-robot experiments confirm that both the tasks and the framework transfer to real-world manipulation.
+
+### Tasks
+- **Localization** — two visually identical objects; only one emits sound. Spatial information alone determines the target.
+- **Identification** — one object emitting one of two sounds; the timbre determines the destination box.
+- **Localization & Identification (L&I)** — both cues are required at once.
+- **Exploratory** — neither object sounds at rest; the robot must shake each one to find the one that rattles.
+
+### Results
+On the L&I task the full S2A2 model is the only configuration that performs well across policies (e.g. 89.7% with Diffusion Policy vs. 9.3% for a vision-only baseline), while ablations that drop a pipeline collapse on the task requiring that modality. On the real robot, S2A2 reaches 72% on L&I (baseline 5%) and 50% on the exploratory task (baseline 12%).
+
+### Status
+Manuscript in preparation — the venue is not yet decided.
+`,
+    imageUrl: '/images/s2a2/overview.jpg',
+    tags: [
+      'Imitation Learning',
+      'Robot Audition',
+      'Multimodal',
+      'Manipulation',
+      'Sound Source Localization',
+      'Diffusion Policy',
+    ],
+  },
+
+  {
+    slug: 'jsai-2026-acoustic-imitation',
+    category: 'research',
+    date: '2026-06',
+    venue: 'JSAI 2026',
+    title: 'JSAI 2026: Multimodal Imitation Learning Using Acoustic Spatial Information',
+    description:
+      '音空間情報を用いたマニピュレータのためのマルチモーダル模倣学習 — sound source localization and separation over microphone arrays, fused with vision for manipulation policies.',
+    longDescription: `
+### Overview
+*音空間情報を用いたマニピュレータのためのマルチモーダル模倣学習*
+(Multimodal Imitation Learning for Robotic Manipulators Using Acoustic Spatial Information)
+
+Imitation learning has made complex manipulation learnable mostly from visual observations, but non-visual cues — contact sounds, and the ambient sound produced while an object is being manipulated — remain underused. This work proposes a multimodal imitation learning method for robotic manipulators that exploits **acoustic spatial information**.
+
+### Approach
+- Apply sound source localization and sound source separation to the signals captured by several microphone arrays.
+- Extract an acoustic representation that reflects the *spatial distribution* of the sound sources.
+- Fuse it with visual observations so that the manipulator learns from sound and vision together.
+
+Experiments show the method improves both learning efficiency and success rate on manipulation tasks where the acoustic environment is a necessary cue.
+
+### Related
+This is the domestic-conference presentation of the line of work developed in [S2A2](/projects/s2a2) and started in [RSJ 2025](/projects/audio-imitation-learning).
+
+Co-authors: Ryosuke Kojima (Kyoto University, RIKEN), Benjamin Yen (RIKEN, Institute of Science Tokyo).
+`,
+    imageUrl: '/images/s2a2/simulation-setup.png',
+    tags: ['Imitation Learning', 'Robot Audition', 'Multimodal', 'Manipulation', 'JSAI'],
+  },
+
+  {
+    slug: 'matsuo-institute-vla',
+    category: 'project',
     date: '2025',
     venue: 'Matsuo Lab',
     title: 'Matsuo Institute: VLA for Autonomous Driving',
@@ -28,19 +98,61 @@ At Matsuo Institute, I am working on the development of a Vision-Language-Action
   {
     slug: 'differentiable-bone-metabolism',
     category: 'research',
-    date: '2025',
-    venue: 'Graduation Research',
-    title: 'Graduation Research: Differentiable Bone Metabolism Simulator',
-    description: 'Developed a differentiable bone metabolism simulator. Specific details are currently undisclosed pending patent application.',
+    date: '2026-02',
+    venue: 'Graduation Thesis',
+    title: 'In-Silico Bone Biopsy: Fusing Machine Learning with a Differentiable Bone Metabolism Simulator',
+    description:
+      'A gray-box system that estimates a patient\'s internal bone state — trabecular microstructure, signalling molecule and cell distributions, stress state — from non-invasive clinical data, by inverting a differentiable bone remodelling simulator. Patent filed.',
     longDescription: `
 ### Overview
-For my graduation research, I developed a novel differentiable bone metabolism simulator.
+Fragility fractures caused by osteoporosis are a major obstacle to healthy life expectancy in an ageing society. Bone strength is governed not only by bone *density* but also by bone *quality* — the structural and material properties of trabecular bone. The clinical standard, DXA, is non-invasive but only yields a 2D density measure; obtaining detailed bone-quality indices or the underlying metabolic dynamics requires an invasive bone biopsy. Diagnosis therefore faces a hard trade-off between non-invasiveness and information content.
 
-### Current Status
-*Specific technical details and achievements are currently omitted as a patent application is in preparation.*
+My graduation thesis (Kyoto University, Faculty of Engineering, February 2026; supervised by Prof. Taiji Adachi) proposes **In-Silico Bone Biopsy (ISBB)**: a computational system that estimates and visualizes a patient's internal bone state from non-invasively obtainable clinical data.
+
+> **A patent application has been filed on this work.**
+
+![In-Silico Bone Biopsy — system concept](/images/isbb/isbb-concept.png)
+
+### Approach: a modular gray-box system
+Black-box machine learning adapts well to individual data but is hard to interpret; white-box mathematical models are physiologically consistent but hard to personalize. ISBB loosely couples the two:
+
+1. **Machine learning module.** A model predicts bone mineral density (BMD) from serum biomarkers, anthropometrics, and demographics, trained on two cycles (1999–2002) of the NHANES cohort (8,722 subjects). Among the candidates, a **heteroscedastic regression model** — which predicts the mean *and* the variance — generalized best, so the boundary conditions carry a quantified uncertainty rather than a single point estimate. Predicted BMD and bone turnover markers (uNTx, BAP) are mapped to BV/TV and to patient-specific formation/resorption rates.
+
+2. **Differentiable simulator: D-Bone.** A bone remodelling simulator built on **JAX**. Stress analysis (FEM, EBE-PCG) → mechanical-to-biochemical transduction (convolution) → signalling molecule transport (reaction–diffusion) → osteoclast/osteoblast dynamics (advection–reaction–diffusion) → bone surface motion (phase field). Writing every stage as a continuous field makes the whole loop end-to-end differentiable.
+
+![D-Bone — the differentiable bone metabolism loop](/images/isbb/d-bone-overview.png)
+
+### Forward analysis
+D-Bone stably reproduces mechanical adaptation from a single trabecula up to the tissue scale, and reproduces the progression of a range of bone pathologies under modulated mechanical and biochemical factors.
+
+![Mechanical adaptation of a single trabecula](/images/isbb/d-bone-remodeling.png)
+
+### Inverse analysis
+Because the simulator is differentiable, gradients can be used to search the high-dimensional parameter space of the remodelling model. Twin experiments show that gradient-based optimization (AdamW) attains higher accuracy and stability than the conventional gradient-free baseline (Nelder–Mead), in both normal and abnormal regimes.
+
+![Twin experiment: AdamW vs. Nelder-Mead](/images/isbb/twin-experiment.png)
+
+![Gradient-based inverse analysis in progress](/images/isbb/inverse-optimization.gif)
+
+A case study on real clinical data then recovers the internal bone state — static trabecular geometry together with the dynamic metabolic state (mechanical stimulus ratio, sclerostin / RANKL / MDGF concentrations, osteoblast and osteoclast densities) — and tracks its change over time.
+
+![Estimated internal bone state for two subjects](/images/isbb/trabecular-inverse.jpg)
+
+### Contribution
+ISBB establishes a basis for inferring, from non-invasive clinical data alone, the detailed internal bone information that previously required an invasive biopsy — and for observing how it evolves. This should deepen our understanding of osteoporosis and support treatment planning tailored to each patient's metabolic state.
+
+### Thesis
+[Download the thesis (PDF, Japanese)](/thesis-isbb-hiratsuka.pdf) — 機械学習と微分可能シミュレータの融合による In-Silico Bone Biopsy の実現
 `,
-    imageUrl: '/images/noimage.png',
-    tags: ['Simulation', 'Differentiable Physics', 'Bioengineering', 'Research'],
+    imageUrl: '/images/isbb/isbb-concept.png',
+    tags: [
+      'Differentiable Simulation',
+      'JAX',
+      'Biomechanics',
+      'Inverse Analysis',
+      'Machine Learning',
+      'Patent',
+    ],
   },
 
   {
@@ -70,7 +182,7 @@ This research proposed a new task called "Acoustic-Informed Pick-and-Place," whe
 
   {
     slug: 'video-world-models',
-    category: 'research',
+    category: 'project',
     date: '2024',
     venue: 'Matsuo Lab · Internship',
     title: 'Video Generation World Models',
@@ -116,7 +228,7 @@ Paper: [https://www.jstage.jst.go.jp/article/jsaisigtwo/2024/Challenge-066/2024_
 
   {
     slug: 'sim2real-drq-v2',
-    category: 'research',
+    category: 'project',
     date: '2024',
     venue: 'KaiRA Journal vol.8',
     title: 'Sim2Real RL for Line-Following Robot',
@@ -315,6 +427,60 @@ I realized Kyoto University lacked a student community specializing in physical 
 `,
     imageUrl: '/images/kupac-workshop.png',
     tags: ['Community Building', 'Leadership', 'Imitation Learning', 'ACT', 'Workshop'],
+  },
+
+  {
+    slug: 'kakusei-project-r8',
+    category: 'project',
+    date: '2026',
+    venue: 'AIST 覚醒プロジェクト',
+    title: 'Selected for the AIST "Kakusei" Project (FY2026)',
+    description:
+      'Selected for 覚醒プロジェクト, AIST\'s programme backing original deep-tech R&D by young researchers with funding, access to ABCI 3.0, and mentoring.',
+    longDescription: `
+### Overview
+I was selected for the **令和8年度 覚醒プロジェクト** (FY2026 "Kakusei" Project), run by the National Institute of Advanced Industrial Science and Technology (AIST) with Kadokawa ASCII Research Laboratories as the secretariat.
+
+The programme backs young researchers pursuing original, unconventional deep-tech R&D that tackles societal problems, across four fields: AI, life engineering, materials & chemistry, and quantum.
+
+### What the programme provides
+- **Funding** — up to ¥3M (salary + research expenses).
+- **Facilities** — access to AIST's leading-edge research infrastructure, including the ABCI 3.0 supercomputer and the MPI platform.
+- **People** — a dedicated project manager, plus a network of fellow awardees and experienced mentors.
+
+![令和8年度 覚醒プロジェクト](/images/kakusei-project.jpg)
+
+Programme page: [kakusei.aist.go.jp/r8](https://kakusei.aist.go.jp/r8/)
+`,
+    imageUrl: '/images/kakusei-project.jpg',
+    tags: ['Deep Tech', 'AIST', 'Research Grant', 'ABCI', 'Physical AI'],
+  },
+
+  {
+    slug: 'sushi-tech-tokyo-2026',
+    category: 'project',
+    date: '2026',
+    venue: 'SusHi Tech Tokyo',
+    title: 'SusHi Tech Tokyo 2026: Cloth-Folding VLA on a Self-Built Bimanual Robot',
+    description:
+      'Exhibited a handkerchief-folding demo at SusHi Tech Tokyo 2026 with KUPAC, running a fine-tuned X-VLA policy on ILOHA, our self-built bimanual robot.',
+    longDescription: `
+### Overview
+With [KUPAC](/projects/kupac-community), the student-led Physical AI community at Kyoto University, we exhibited a **cloth-folding demonstration** at SusHi Tech Tokyo 2026, running a Vision-Language-Action policy on **ILOHA** — the open-source bimanual manipulator we build ourselves.
+
+### What we did
+- Collected roughly **300 teleoperated episodes** of handkerchief folding.
+- Compared candidate VLA models and settled on **X-VLA**, fine-tuned on a dataset in which high- and low-quality demonstrations carry an explicit quality label.
+- On site, the lighting, background, and camera angles differed enough from our lab that the policy degraded. We collected **50 extra episodes at the venue** and re-fine-tuned for 3.5 hours, taking the success rate from roughly 60% to over 90%.
+
+### Lesson learned
+The bottleneck was not the model. Cable reliability and USB bandwidth were what actually limited the demo — a reminder that in Physical AI the hardware plumbing decides how much of your policy the audience ever gets to see.
+
+### Write-up
+[【SusHi Tech Tokyo 2026】自作双腕ロボット×VLAで布畳みロボを展示した話 (Qiita)](https://qiita.com/hirekatsu0523/items/781b6a368d735f5a6bbe)
+`,
+    imageUrl: '/images/noimage.png',
+    tags: ['VLA', 'Imitation Learning', 'Robotics', 'ILOHA', 'Exhibition', 'KUPAC'],
   },
 ];
 

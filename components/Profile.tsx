@@ -6,7 +6,7 @@ import { useDocumentMeta } from './useDocumentMeta';
 const Profile: FC = () => {
   useDocumentMeta(
     '平塚謙良 (Kaneyoshi Hiratsuka) | AI Researcher',
-    'Kaneyoshi Hiratsuka — AI Researcher at Kyoto University working on robotics, reinforcement learning, multimodal perception, and world models. Research, projects, and writing.'
+    "Kaneyoshi Hiratsuka — master's student in the Learning Machines group, Kyoto University. Reinforcement learning, imitation learning, robot foundation models, robot audition, and differentiable simulators."
   );
 
   return (
@@ -59,8 +59,8 @@ const Profile: FC = () => {
                 <p className="text-base sm:text-lg text-ink-light leading-relaxed">
                   Working at the intersection of{' '}
                   <span className="text-ink font-medium">AI and robotics</span> — reinforcement
-                  learning, multimodal perception, and world models for intelligent autonomous
-                  systems.
+                  learning, imitation learning, robot foundation models, robot audition, and
+                  differentiable simulators.
                 </p>
               </div>
             </div>
@@ -72,16 +72,7 @@ const Profile: FC = () => {
               </h2>
               <div className="max-w-3xl space-y-4 text-base sm:text-lg text-ink-light leading-relaxed">
                 <p>
-                  I am a 4th-year B.Eng. student at Kyoto University, affiliated with the{' '}
-                  <a
-                    href="https://www2.infront.kyoto-u.ac.jp/bf05/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-accent underline underline-offset-2 hover:text-accent-hover"
-                  >
-                    Biomechanics Lab
-                  </a>
-                  . Expecting to graduate in March 2026, I will join the{' '}
+                  I am a first-year master's student (M1) in the{' '}
                   <a
                     href="https://lm.sys.i.kyoto-u.ac.jp/"
                     target="_blank"
@@ -89,17 +80,20 @@ const Profile: FC = () => {
                     className="text-accent underline underline-offset-2 hover:text-accent-hover"
                   >
                     Learning Machines group
-                  </a>{' '}
-                  at the Graduate School of Informatics, Kyoto University, from the 2026 academic
-                  year. My focus is on developing intelligent systems that can perceive and interact
-                  with the world in complex ways.
+                  </a>
+                  , Department of Systems Science, Graduate School of Informatics, Kyoto University.
                 </p>
                 <p>
-                  As a Research Intern at The University of Tokyo's Matsuo Laboratory, I developed
-                  video-generation world models and Vision-Language-Action (VLA) models for
-                  autonomous driving. Previously, as Co-founder &amp; CTO of ONIXION Inc., I led the
-                  development of AI-driven solutions for the manufacturing sector. I am also actively
-                  involved in running{' '}
+                  I want to build robots that behave like humans and think like humans. Toward that
+                  goal I work on{' '}
+                  <span className="text-ink font-medium">reinforcement learning</span>,{' '}
+                  <span className="text-ink font-medium">imitation learning</span>,{' '}
+                  <span className="text-ink font-medium">robot foundation models</span>,{' '}
+                  <span className="text-ink font-medium">robot audition</span>, and{' '}
+                  <span className="text-ink font-medium">differentiable simulators</span>.
+                </p>
+                <p>
+                  Outside the lab, I serve on the organizing committee of{' '}
                   <a
                     href="https://www.kupac.org/ja/"
                     target="_blank"
@@ -108,11 +102,21 @@ const Profile: FC = () => {
                   >
                     KUPAC
                   </a>
-                  , a student-led Physical AI community.
+                  , a student-led Physical AI community at Kyoto University, and as a Director of{' '}
+                  <a
+                    href="https://www.xpac.or.jp/ja/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent underline underline-offset-2 hover:text-accent-hover"
+                  >
+                    XPAC
+                  </a>{' '}
+                  (一般社団法人次世代フィジカルAI育成機構), a non-profit growing an open Physical AI
+                  ecosystem.
                 </p>
-                <p>
-                  I am driven by a curiosity for multimodal and reinforcement learning, constantly
-                  exploring how to build more capable and robust autonomous agents.
+                <p className="text-ink-muted">
+                  The ultimate goal, of course, is a maid robot. Everything above is just the
+                  research programme required to get there. 🤖🧹
                 </p>
               </div>
 

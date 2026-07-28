@@ -10,8 +10,8 @@ import { useDocumentMeta } from './useDocumentMeta';
 
 const AUTHORS = [
   { name: 'Kaneyoshi Hiratsuka', affiliations: [1], href: '/' },
-  { name: 'Ryosuke Kojima', affiliations: [1, 2] },
   { name: 'Benjamin Yen', affiliations: [2, 3] },
+  { name: 'Ryosuke Kojima', affiliations: [1, 2] },
 ];
 
 const AFFILIATIONS = [

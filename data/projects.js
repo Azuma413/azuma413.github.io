@@ -31,8 +31,9 @@ We propose **Spatial-Spectral Audio Action (S2A2)**, a multimodal imitation lear
 ### Results
 On the L&I task the full S2A2 model is the only configuration that performs well across policies (e.g. 89.7% with Diffusion Policy vs. 9.3% for a vision-only baseline), while ablations that drop a pipeline collapse on the task requiring that modality. On the real robot, S2A2 reaches 72% on L&I (baseline 5%) and 50% on the exploratory task (baseline 12%).
 
-### Status
-Manuscript in preparation — the venue is not yet decided.
+### Links
+- Paper / arXiv: [arXiv:2607.26047](https://arxiv.org/abs/2607.26047)
+- Code: [github.com/Azuma413/S2A2](https://github.com/Azuma413/S2A2)
 `,
     imageUrl: '/images/s2a2/overview.jpg',
     tags: [

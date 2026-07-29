@@ -1,4 +1,4 @@
-import React, { useEffect, FC, ReactNode } from 'react';
+import React, { useEffect, useState, FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import AnimatedDiv from './AnimatedDiv';
 import { useDocumentMeta } from './useDocumentMeta';
@@ -19,6 +19,24 @@ const AFFILIATIONS = [
   'RIKEN',
   'Institute of Science Tokyo',
 ];
+
+const ARXIV_ID = '2607.26047';
+
+const LINKS = [
+  { label: 'Paper', href: `https://arxiv.org/pdf/${ARXIV_ID}`, icon: '📄' },
+  { label: 'arXiv', href: `https://arxiv.org/abs/${ARXIV_ID}`, icon: '📚' },
+  { label: 'Code', href: 'https://github.com/Azuma413/S2A2', icon: '💻' },
+];
+
+const BIBTEX = `@misc{hiratsuka2026s2a2audiovisualimitationlearning,
+      title={S2A2: Audio-Visual Imitation Learning for Manipulation Tasks Using Acoustic Spatial Information},
+      author={Kaneyoshi Hiratsuka and Benjamin Yen and Ryosuke Kojima},
+      year={2026},
+      eprint={2607.26047},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2607.26047},
+}`;
 
 const TASKS = [
   {
@@ -121,6 +139,15 @@ const S2A2Page: FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(BIBTEX).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
   return (
     <div className="pt-24 pb-20 lg:pt-28 lg:pb-28">
       {/* ---------- Hero ---------- */}
@@ -168,17 +195,30 @@ const S2A2Page: FC = () => {
 
             {/* Status / links */}
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full border border-hair bg-white px-5 py-2 text-sm font-medium text-ink-muted">
-                <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
-                Manuscript in preparation — venue not yet decided
-              </span>
-              <Link
-                to="/projects/audio-imitation-learning"
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-accent-hover"
-              >
-                Earlier work (RSJ 2025)
-              </Link>
+              {LINKS.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-80"
+                >
+                  <span aria-hidden>{link.icon}</span>
+                  {link.label}
+                </a>
+              ))}
             </div>
+            <p className="mt-4 text-sm text-ink-muted">
+              arXiv:{' '}
+              <a
+                href={`https://arxiv.org/abs/${ARXIV_ID}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent underline underline-offset-2 hover:text-accent-hover"
+              >
+                {ARXIV_ID}
+              </a>
+            </p>
           </div>
         </AnimatedDiv>
       </header>
@@ -514,33 +554,19 @@ const S2A2Page: FC = () => {
               </p>
             </Section>
 
-            <Section title="Related Pages">
-              <ul className="space-y-2">
-                <li>
-                  <Link
-                    to="/projects/jsai-2026-acoustic-imitation"
-                    className="text-accent underline underline-offset-2 hover:text-accent-hover"
-                  >
-                    JSAI 2026 — 音空間情報を用いたマニピュレータのためのマルチモーダル模倣学習
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/projects/audio-imitation-learning"
-                    className="text-accent underline underline-offset-2 hover:text-accent-hover"
-                  >
-                    RSJ 2025 — Audio-informed Imitation Learning
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/projects/sound-source-tracking"
-                    className="text-accent underline underline-offset-2 hover:text-accent-hover"
-                  >
-                    JSAI SIG-Challenge 2024 — Sound Source Tracking with World Models
-                  </Link>
-                </li>
-              </ul>
+            <Section title="BibTeX">
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="absolute right-3 top-3 rounded-md border border-hair bg-white px-3 py-1 text-xs font-medium text-ink-muted transition-colors hover:text-ink"
+                >
+                  {copied ? 'Copied!' : 'Copy'}
+                </button>
+                <pre className="overflow-x-auto rounded-xl border border-hair bg-white p-5 pr-20 text-xs leading-relaxed text-ink-light sm:text-sm">
+                  <code>{BIBTEX}</code>
+                </pre>
+              </div>
             </Section>
 
             <div className="mt-16 border-t border-hair pt-8">

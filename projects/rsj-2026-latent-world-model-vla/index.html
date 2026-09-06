@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="gbOgzMa1wWrGbLrYAZq1SpwhBwtD-QqL5_ViY6jd5aI" />
+  <title>Adapting VLAs to Environment Changes with a Latent World Model | Kaneyoshi Hiratsuka</title>
+  <meta name="description" content="潜在世界モデルを用いたVLAの環境変化への適応 — a verifier scores Best-of-N candidates from a frozen VLA, and its choice becomes the GRPO reward that adapts a noise-space steering policy at test time." />
+  <meta name="keywords"
+    content="Kaneyoshi Hiratsuka, AI, Robotics, Machine Learning, Reinforcement Learning, Diffusion Models, PyTorch, ROS2, Research" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', '"Noto Sans JP"', 'sans-serif'],
+            serif: ['"Noto Serif JP"', 'Georgia', '"Times New Roman"', 'serif'],
+            heading: ['"Noto Serif JP"', 'Georgia', 'serif'],
+          },
+          colors: {
+            paper: '#fcfcfb',
+            ink: {
+              DEFAULT: '#1f2937',
+              light: '#475569',
+              muted: '#6b7280',
+              faint: '#94a3b8',
+            },
+            accent: {
+              DEFAULT: '#2f4a6b',
+              hover: '#22374f',
+              soft: '#eef2f7',
+            },
+            hair: '#e7e5e4',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --grid-line: rgba(31, 41, 55, 0.045);
+      --grid-size: 28px;
+    }
+
+    html {
+      background-color: #fcfcfb;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      color: #1f2937;
+      background-color: #fcfcfb;
+      overflow-x: hidden;
+      /* Faint notebook / graph-paper grid */
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: var(--grid-size) var(--grid-size);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Noto Serif JP', Georgia, serif;
+    }
+
+    ::selection {
+      background-color: #d6e0ec;
+    }
+
+    /* Light-theme prose for blog / detail pages */
+    .prose {
+      color: #374151;
+    }
+
+    .prose h1,
+    .prose h2,
+    .prose h3,
+    .prose h4,
+    .prose h5,
+    .prose h6 {
+      color: #1f2937;
+      font-family: 'Noto Serif JP', Georgia, serif;
+    }
+
+    .prose a {
+      color: #2f4a6b;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .prose a:hover {
+      color: #22374f;
+    }
+
+    .prose strong {
+      color: #1f2937;
+    }
+
+    .prose code {
+      color: #1f2937;
+      background-color: #f1f0ee;
+      padding: 0.2em 0.4em;
+      border-radius: 0.25rem;
+      font-size: 0.9em;
+    }
+
+    .prose pre {
+      background-color: #1f2937;
+      color: #f3f4f6;
+      padding: 1em;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .prose pre code {
+      color: #f3f4f6;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .prose blockquote {
+      color: #6b7280;
+      border-left-color: #cbd5e1;
+    }
+  </style>
+
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.23.1",
+    "react-markdown": "https://esm.sh/react-markdown@9.0.1",
+    "remark-gfm": "https://esm.sh/remark-gfm@4.0.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-DrRMMWO2.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BYZTj3zW.css">
+  <link rel="canonical" href="https://azuma413.github.io/projects/rsj-2026-latent-world-model-vla/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Kaneyoshi Hiratsuka" />
+  <meta property="og:title" content="Adapting VLAs to Environment Changes with a Latent World Model | Kaneyoshi Hiratsuka" />
+  <meta property="og:description" content="潜在世界モデルを用いたVLAの環境変化への適応 — a verifier scores Best-of-N candidates from a frozen VLA, and its choice becomes the GRPO reward that adapts a noise-space steering policy at test time." />
+  <meta property="og:url" content="https://azuma413.github.io/projects/rsj-2026-latent-world-model-vla/" />
+  <meta property="og:image" content="https://azuma413.github.io/images/rsj2026/overview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Adapting VLAs to Environment Changes with a Latent World Model | Kaneyoshi Hiratsuka" />
+  <meta name="twitter:description" content="潜在世界モデルを用いたVLAの環境変化への適応 — a verifier scores Best-of-N candidates from a frozen VLA, and its choice becomes the GRPO reward that adapts a noise-space steering policy at test time." />
+  <meta name="twitter:image" content="https://azuma413.github.io/images/rsj2026/overview.png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","headline":"Adapting VLAs to Environment Changes with a Latent World Model","name":"Adapting VLAs to Environment Changes with a Latent World Model","description":"潜在世界モデルを用いたVLAの環境変化への適応 — a verifier scores Best-of-N candidates from a frozen VLA, and its choice becomes the GRPO reward that adapts a noise-space steering policy at test time.","keywords":"VLA, Test-Time Adaptation, World Model, GRPO, Reinforcement Learning, LIBERO","author":{"@type":"Person","name":"Kaneyoshi Hiratsuka"},"datePublished":"2026-09","url":"https://azuma413.github.io/projects/rsj-2026-latent-world-model-vla/","publisher":{"@type":"Organization","name":"RSJ 2026"}}</script>
+</head>
+
+<body class="bg-paper text-ink">
+  <div id="root"><main style="max-width:48rem;margin:0 auto;padding:6rem 1.5rem;font-family:sans-serif"><p>Research · RSJ 2026 · 2026-09</p><h1>Adapting VLAs to Environment Changes with a Latent World Model</h1><p>潜在世界モデルを用いたVLAの環境変化への適応 — a verifier scores Best-of-N candidates from a frozen VLA, and its choice becomes the GRPO reward that adapts a noise-space steering policy at test time.</p><div>Overview 潜在世界モデルを用いたVLAの環境変化への適応 (Adapting Vision Language Action Models to Environment Changes Using a Latent World Model) Presented as talk 2A1 03 on 3 September 2026 at the 44th Annual Conference of the Robotics Society of Japan (第44回日本ロボット学会学術講演会, RSJ 2026), Kanazawa University Kakuma Campus. Co authors: Satoshi Yamamori, Jun Morimoto (Graduate School of Informatics, Kyoto University). Motivation VLA policies lose a large amount of performance when the environment changes — on real hardware, a lighting change or a camera that has drifted a few centimetres is enough. Two families of methods try to fix this at inference time: Test Time Computing (TTC) — spend more compute, generate action candidates and let a verifier pick the best one (RoboMonkey, RoVer). The evaluation is thrown away after the pick; it never improves the policy. Test Time Adaptation (TTA) — update weights online from interaction (DSRL, EVOLVE VLA). The hard part is obtaining a learning signal from the environment at all. This work closes the loop between the two: the verifier's selection is itself the reward used to update a steering policy at test time, while the VLA stays frozen. Method At inference, per step: 1. A DSRL style steering policy outputs a noise action , added to the base noise . 2. The VLA's action expert takes that noise and generates action candidates . 3. A verifier scores the candidates; the best one is executed. 4. The selection is turned into a GRPO update of the steering policy — top 1 advantage (+1 for the argmax, otherwise), with clipped so the shift cannot run away, and updates…</div><p>#VLA #Test-Time Adaptation #World Model #GRPO #Reinforcement Learning #LIBERO</p><p><a href="/">Kaneyoshi Hiratsuka</a></p></main></div>
+</body>
+
+</html>

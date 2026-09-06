@@ -129,6 +129,10 @@ On the L&I task the full S2A2 model is the only configuration that performs well
 
 ### Status
 **Accepted to CoRL 2026** (Conference on Robot Learning) on 5 September 2026.
+
+### Links
+- Paper / arXiv: [arXiv:2607.26047](https://arxiv.org/abs/2607.26047)
+- Code: [github.com/Azuma413/S2A2](https://github.com/Azuma413/S2A2)
 `,
     imageUrl: '/images/s2a2/overview.jpg',
     tags: [

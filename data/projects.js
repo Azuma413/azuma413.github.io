@@ -7,9 +7,105 @@
 
 export const projectsData = [
   {
+    slug: 'rsj-2026-latent-world-model-vla',
+    category: 'research',
+    date: '2026-09',
+    venue: 'RSJ 2026',
+    title: 'Adapting VLAs to Environment Changes with a Latent World Model',
+    description:
+      '潜在世界モデルを用いたVLAの環境変化への適応 — a verifier scores Best-of-N candidates from a frozen VLA, and its choice becomes the GRPO reward that adapts a noise-space steering policy at test time.',
+    longDescription: `
+### Overview
+*潜在世界モデルを用いたVLAの環境変化への適応*
+(Adapting Vision-Language-Action Models to Environment Changes Using a Latent World Model)
+
+Presented as talk **2A1-03** on 3 September 2026 at the 44th Annual Conference of the Robotics Society of Japan (第44回日本ロボット学会学術講演会, RSJ 2026), Kanazawa University Kakuma Campus.
+
+Co-authors: Satoshi Yamamori, Jun Morimoto (Graduate School of Informatics, Kyoto University).
+
+### Motivation
+VLA policies lose a large amount of performance when the environment changes — on real hardware, a lighting change or a camera that has drifted a few centimetres is enough. Two families of methods try to fix this at inference time:
+
+- **Test-Time Computing (TTC)** — spend more compute, generate $N$ action candidates and let a verifier pick the best one (RoboMonkey, RoVer). The evaluation is thrown away after the pick; it never improves the policy.
+- **Test-Time Adaptation (TTA)** — update weights online from interaction (DSRL, EVOLVE-VLA). The hard part is obtaining a learning signal from the environment at all.
+
+This work closes the loop between the two: **the verifier's selection is itself the reward** used to update a steering policy at test time, while the VLA stays frozen.
+
+### Method
+At inference, per step:
+
+1. A **DSRL-style steering policy** outputs a noise action $\\epsilon \\sim \\mathcal{N}(\\mu_\\theta, \\sigma^2)$, added to the base noise $\\epsilon_0 \\sim \\mathcal{N}(0, 1)$.
+2. The VLA's **action expert** takes that noise and generates $N$ action candidates $\\{A_i\\}_{i=1}^{N}$.
+3. A **verifier** scores the candidates; the best one is executed.
+4. The selection is turned into a **GRPO update** of the steering policy — top-1 advantage (+1 for the argmax, $-1/(N-1)$ otherwise), with $\\mu$ clipped so the shift cannot run away, and updates taken **only from successful episodes**.
+
+Everything except the steering policy — vision encoder, action expert, verifier, world model — is frozen, so the VLA itself is never touched.
+
+Two verifiers are compared:
+
+- $V_{act}$ — takes the observation latent tokens $z_t$ and a candidate action $a_{t:t+H}$ and outputs a score.
+- $V_{latent}$ — a **latent world model** first predicts the latent-token residual that executing the candidate would produce (conditioned on 3 past latent steps, proprioception, and the candidate action); the verifier then scores the *predicted* latent $\\hat{z}_{t+H}$.
+
+Both verifiers are trained with a Bradley–Terry ranking loss over 8 candidates sampled from the same state, ranked by their RMSE against the expert action.
+
+### Experimental setup
+- **Benchmarks** — LIBERO (50 rollouts per task from varied initial placements) and LIBERO-plus (each task perturbed 7 ways).
+- **Data** — 10,000 rollout episodes collected in LIBERO with a pretrained $\\pi_{0.5}$, roughly half successes and half failures.
+- **Policy** — SmolVLA, behaviour-cloned on the successful trajectories only; checkpoints from 4k to 20k steps give a spread of policy strengths.
+- **Adaptation budget** — the steering policy is zero-initialised per task and updated from just **10 Best-of-8 episodes** before evaluation.
+
+### Results
+
+![Best-of-N sweeps and GRPO adaptation on LIBERO-Object / LIBERO-Long](/images/rsj2026/sweeps.png)
+
+- **Gains concentrate where the base policy is weak.** For a weak policy (5k steps), Best-of-8 alone is worth +8 to +22 pt, and GRPO adds up to **+19 pt** on top. Running **GRPO + Best-of-1** afterwards still keeps +4–6 pt, i.e. the adaptation survives without any extra test-time compute.
+- **Sample-efficient.** 10 adaptation episodes are already worth +9 pt — fewer than DSRL needs.
+
+![Verifier ablation — the world model must use the VLA's own feature space](/images/rsj2026/verifier-ablation.png)
+
+- **Out of distribution, $V_{latent}$ is the most robust**, and the latent world model has to be built on the *policy's* feature space: with the SmolVLA encoder it reaches 71% on LIBERO-Long against 45% for a DINOv2 encoder. A probing analysis suggests why — SmolVLA features are not more visually OOD-robust than DINOv2 (94% vs 62% on nearest-neighbour task retrieval, so that hypothesis is rejected), but they carry markedly more state and action information.
+
+![LIBERO-plus success rate by perturbation category](/images/rsj2026/plus-categories.png)
+
+- Camera viewpoint and sensor noise are where the base policy suffers most, and where Best-of-8 with $V_{latent}$ roughly doubles the success rate (6% → 13%, 10% → 15%).
+
+![Reward hacking under an unguarded latent reward, and its removal](/images/rsj2026/mechanism.png)
+
+- **Limitations.** Above roughly 90% base success rate the method is slightly harmful. And the raw $V_{latent}$ reward is exploitable — without guards the learned shift $\\|\\mu\\|$ runs away and success collapses; filtering updates to successful episodes removes the runaway.
+
+### Qualitative results
+LIBERO-Long task 8 — *put both moka pots on the stove*. Baseline (SmolVLA 5k steps) on the left, ours (GRPO 10 episodes, Best-of-8) on the right.
+
+<video src="/images/rsj2026/long-t8-baseline.mp4" controls loop muted playsinline width="480"></video>
+<video src="/images/rsj2026/long-t8-ours.mp4" controls loop muted playsinline width="480"></video>
+
+LIBERO-Long task 9 — *put the yellow and white mug in the microwave and close it*.
+
+<video src="/images/rsj2026/long-t9-baseline.mp4" controls loop muted playsinline width="480"></video>
+<video src="/images/rsj2026/long-t9-ours.mp4" controls loop muted playsinline width="480"></video>
+
+### Outlook
+Two threads remain open: understanding *why* the VLA's own feature space is what makes the latent world model work, and finding a formulation that does not lose ground on already-strong policies.
+
+### Related
+The noise-space policy comes out of the Diffusion/Flow policy RL work done for the [AIRoA VLA Competition](/projects/airoa-vla-competition).
+`,
+    imageUrl: '/images/rsj2026/overview.png',
+    tags: [
+      'VLA',
+      'Test-Time Adaptation',
+      'World Model',
+      'GRPO',
+      'Reinforcement Learning',
+      'LIBERO',
+    ],
+  },
+
+  {
     slug: 's2a2',
     category: 'research',
     date: '2026-07',
+    venue: 'CoRL 2026',
     title: 'S2A2: Audio-Visual Imitation Learning for Manipulation Tasks Using Acoustic Spatial Information',
     description:
       'A multimodal imitation learning framework that fuses acoustic spatial maps and spotformed spectrograms with vision, plus a new suite of acoustic-aware manipulation tasks.',
@@ -32,7 +128,7 @@ We propose **Spatial-Spectral Audio Action (S2A2)**, a multimodal imitation lear
 On the L&I task the full S2A2 model is the only configuration that performs well across policies (e.g. 89.7% with Diffusion Policy vs. 9.3% for a vision-only baseline), while ablations that drop a pipeline collapse on the task requiring that modality. On the real robot, S2A2 reaches 72% on L&I (baseline 5%) and 50% on the exploratory task (baseline 12%).
 
 ### Status
-Manuscript in preparation — the venue is not yet decided.
+**Accepted to CoRL 2026** (Conference on Robot Learning) on 5 September 2026.
 `,
     imageUrl: '/images/s2a2/overview.jpg',
     tags: [
@@ -50,7 +146,7 @@ Manuscript in preparation — the venue is not yet decided.
     category: 'research',
     date: '2026-06',
     venue: 'JSAI 2026',
-    title: 'JSAI 2026: Multimodal Imitation Learning Using Acoustic Spatial Information',
+    title: 'Multimodal Imitation Learning Using Acoustic Spatial Information',
     description:
       '音空間情報を用いたマニピュレータのためのマルチモーダル模倣学習 — sound source localization and separation over microphone arrays, fused with vision for manipulation policies.',
     longDescription: `
@@ -160,7 +256,7 @@ ISBB establishes a basis for inferring, from non-invasive clinical data alone, t
     category: 'research',
     date: '2025-09',
     venue: 'RSJ 2025',
-    title: 'RSJ 2025: Audio-informed Imitation Learning',
+    title: 'Audio-informed Imitation Learning',
     description: 'A novel method to integrate audio signals for manipulation tasks unsolvable with visual information alone.',
     longDescription: `
 ### Overview
@@ -211,7 +307,7 @@ During my internship, I helped develop video generation world models (combining 
     category: 'research',
     date: '2024-07',
     venue: 'JSAI SIG-Challenge 2024',
-    title: 'JSAI SIGAI 2024: Sound Source Tracking with World Models',
+    title: 'Sound Source Tracking with World Models',
     description: 'Developed a robot with a microphone array that uses a DreamerV3 world model to track sound sources in vision-denied scenarios.',
     longDescription: `
 ### Overview

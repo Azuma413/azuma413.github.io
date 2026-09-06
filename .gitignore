@@ -29,3 +29,6 @@ public/notion-assets/
 *.sw?
 
 tmp/
+
+.claude/
+.github/

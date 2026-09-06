@@ -17,6 +17,18 @@ export const MAX_NEWS_ITEMS = 10;
 
 export const newsData = [
   {
+    date: '2026-09-05',
+    title:
+      'S2A2 was accepted to CoRL 2026 (Conference on Robot Learning).',
+    href: '/projects/s2a2',
+  },
+  {
+    date: '2026-09-03',
+    title:
+      'Presented at RSJ 2026 (第44回日本ロボット学会学術講演会, Kanazawa University) — adapting VLAs to environment changes with a latent world model.',
+    image: '/images/news/rsj2026.jpg',
+  },
+  {
     date: '2026-07-11',
     title: '関西フィジカル AI若手交流会 — Gave a talk on imitation learning and robot audition.',
     image: '/images/news/kansai-wakate-2026.jpg',

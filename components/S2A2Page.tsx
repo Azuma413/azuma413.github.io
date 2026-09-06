@@ -170,7 +170,7 @@ const S2A2Page: FC = () => {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-hair bg-white px-5 py-2 text-sm font-medium text-ink-muted">
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden />
-                Manuscript in preparation — venue not yet decided
+                Accepted to CoRL 2026
               </span>
               <Link
                 to="/projects/audio-imitation-learning"

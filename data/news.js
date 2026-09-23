@@ -17,6 +17,16 @@ export const MAX_NEWS_ITEMS = 10;
 
 export const newsData = [
   {
+    date: '2026-09-19',
+    title: 'Gave a talk at iHR 2026 on building a VLA evaluation platform at KUPAC.',
+    href: 'https://www.i-homerobotics.org/activity/iHR15',
+  },
+  {
+    date: '2026-09-13',
+    title: 'Participated in Catch Robo Battle Contest 2026 and received the Judges\' Special Award.',
+    image: '/images/catchrobo2026.jpg',
+  },
+  {
     date: '2026-09-05',
     title:
       'S2A2 was accepted to CoRL 2026 (Conference on Robot Learning).',

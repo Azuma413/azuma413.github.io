@@ -9,7 +9,7 @@ import { useDocumentMeta } from './useDocumentMeta';
 // still supplies the Research-list row and the build-time SEO prerender.
 
 const AUTHORS = [
-  { name: 'Kaneyoshi Hiratsuka', affiliations: [1], href: '/' },
+  { name: 'Kaneyoshi Hiratsuka', affiliations: [1, 2], href: '/' },
   { name: 'Benjamin Yen', affiliations: [2, 3] },
   { name: 'Ryosuke Kojima', affiliations: [1, 2] },
 ];

@@ -7,6 +7,80 @@
 
 export const projectsData = [
   {
+    slug: 'ihr-2026',
+    category: 'project',
+    date: '2026-09-19',
+    venue: 'iHR 2026',
+    title: 'iHR 2026: Building a VLA Evaluation Platform at KUPAC',
+    description:
+      'A talk on building a low-cost VLA evaluation platform with ILOHA, Quest 3, and LeRobot, from demonstration collection to cloth folding and practical deployment.',
+    longDescription: `
+### Overview
+On 19 September 2026, I gave a talk titled **KUPACにおけるVLA検証基盤の構築** (Building a VLA Evaluation Platform at KUPAC) at the [15th Intelligent Home Robotics Workshop (iHR)](https://www.i-homerobotics.org/activity/iHR15), held at Soka University.
+
+The talk followed our work at KUPAC to build an affordable platform for the complete robot-learning cycle: collecting demonstrations, training policies, deploying them on a real robot, and using the results to improve the system.
+
+### Building the platform
+- **ILOHA hardware.** Our custom dual-arm robot combines Robstride QDD motors near the base with Dynamixel motors near the end effectors. Each arm has six joints and a gripper; the setup costs approximately JPY 500,000.
+- **MR teleoperation.** Meta Quest 3 controllers act as virtual leader arms. Inverse kinematics converts their poses into joint commands, reducing the cost and space needed for physical leader arms.
+- **A PC-centered pipeline.** Quest 3 handles input and inverse kinematics, while the PC manages robot control and data recording. WebSocket carries control commands and UDP carries joint-angle updates.
+- **LeRobot integration.** Camera images and joint states are recorded as LeRobot datasets, connecting demonstration collection, policy training, and deployment through a shared robot interface.
+
+### From pick-and-place to cloth folding
+We first validated the pipeline by training ACT to move snacks into a box, then tackled folding a 30 cm square handkerchief twice with **X-VLA**.
+
+We collected approximately **307 demonstrations**, varying the initial cloth placement, background, and lighting. After visually assessing demonstration quality, we used 200 high-quality and 53 lower-quality episodes for training, with quality labels added to the language instructions. A clear behavioral difference between the labels had not yet been confirmed; their quantitative benefit remains an open question.
+
+The cloth-folding policy was fine-tuned from X-VLA weights pretrained on garment folding. At the SusHi Tech Tokyo 2026 venue, changes in lighting, background, and camera pose reduced success to roughly **60-70%**. Collecting 50 successful on-site episodes and fine-tuning with the existing data brought success back to nearly **90%**, as reported in the talk.
+
+### Lessons from real hardware
+The presentation also covered the practical work needed to keep experiments running: stabilizing inverse kinematics near singularities, improving wireless communication, distributing cameras across USB host controllers, and resolving unreliable motor connections. Similar joint layouts did not guarantee dataset compatibility either: differences in wrist motion prevented direct reuse of an existing bimanual dataset.
+
+These experiences emphasized that reliable hardware and a repeatable data-to-deployment workflow are essential to evaluating VLA policies in practice.
+
+### Related links
+Workshop information and the two Qiita articles on which the presentation is based:
+
+- [iHR 2026 workshop website and program](https://www.i-homerobotics.org/activity/iHR15)
+- [Qiita: 【MR×LeRobot】Quest 3と自作ロボットで，低コストにロボットデータ収集システムを構築した話](https://qiita.com/hirekatsu0523/items/0b850d63bb9c7182e2fb)
+- [Qiita: 【SusHi Tech Tokyo 2026】自作双腕ロボット×VLAで布畳みロボを展示した話](https://qiita.com/hirekatsu0523/items/781b6a368d735f5a6bbe)
+`,
+    imageUrl: '/images/ihr2026.jpg',
+    tags: ['VLA', 'Robotics', 'LeRobot', 'Teleoperation', 'Cloth Folding', 'Talk'],
+  },
+
+  {
+    slug: 'catch-robo-2026',
+    category: 'project',
+    date: '2026-09-13',
+    venue: 'Catch Robo',
+    title: 'Catch Robo 2026: Fully Automated Teaching-Based Control',
+    description:
+      'Fully automated robot operation using pre-collected trajectories with optimized speeds and positional offsets. Received the Judges\' Special Award at Catch Robo Battle Contest 2026.',
+    longDescription: `
+### Overview
+On 13 September 2026, we participated in **Catch Robo Battle Contest 2026 (キャチロボバトルコンテスト2026)** and received the **Judges' Special Award (審査員特別賞)**.
+
+This year's system achieved fully automated operation through teaching-based control, using trajectories collected in advance.
+
+### Control approach
+- **Collect trajectories in advance.** Record the robot motions needed for the task as the basis for teaching-based execution.
+- **Optimize speed and offsets.** Adjust the speeds and positional offsets of the collected trajectories before execution.
+- **Automate execution.** Execute the optimized trajectories through teaching-based control to perform the task fully automatically.
+
+### YouTube Demo
+<iframe width="812" height="461" src="https://www.youtube.com/embed/t6P4GBufZrY" title="Catch Robo Battle Contest 2026 demonstration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+[Watch on YouTube](https://youtu.be/t6P4GBufZrY)
+
+### Related
+[Catch Robo 2025: MR Teleoperation System](/projects/catch-robo-2025)
+`,
+    imageUrl: '/images/catchrobo2026.jpg',
+    tags: ['Robotics', 'Teaching', 'Trajectory Optimization', 'Automation'],
+  },
+
+  {
     slug: 'rsj-2026-latent-world-model-vla',
     category: 'research',
     date: '2026-09',

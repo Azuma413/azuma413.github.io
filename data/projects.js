@@ -7,6 +7,67 @@
 
 export const projectsData = [
   {
+    slug: 'verify-act-distill',
+    category: 'research',
+    date: '2026-10-10',
+    venue: 'ArXiv',
+    title: 'Verify, Act, Distill: Turning Test-Time Compute into Test-Time Adaptation for Vision-Language-Action Models',
+    description:
+      'Distilling verifier-guided action aggregation into a VLA retains about 74% of the test-time compute gain in single-candidate inference and improves subsequent candidate aggregation.',
+    longDescription: `
+### Paper
+**Kaneyoshi Hiratsuka, Satoshi Yamamori, Jun Morimoto** — Kyoto University.
+
+[Read the paper on arXiv](https://arxiv.org/abs/2610.14885) · [PDF](https://arxiv.org/pdf/2610.14885)
+
+### Overview
+Test-time compute can improve a vision-language-action (VLA) model by generating and evaluating multiple action candidates. When the policy stays frozen, however, this extra computation must be repeated at every execution.
+
+**Verify, Act, Distill** turns these execution decisions into training data for the VLA itself. A fixed verifier scores candidate action chunks, their weighted aggregate is executed, and successful adaptation episodes provide supervision for a small LoRA update. The resulting policy can retain the improvement with a single candidate and no verifier, or use candidate aggregation again for further gains.
+
+### Method
+1. **Verify.** Generate eight action chunks with a flow-matching VLA (SmolVLA) and score them with a fixed action verifier.
+2. **Act.** Convert the scores into softmax weights and execute the first 10 steps of the weighted aggregate. Store the observation and the full 50-step aggregated plan.
+3. **Distill.** After collecting 10 adaptation episodes per task, keep the successful episodes and train only the action expert's LoRA parameters using the standard flow-matching loss.
+
+The policy and verifier remain fixed during episode collection. Adaptation reuses the plans already computed for execution, without additional reinforcement learning or separate rollouts for teacher generation. LoRA parameters are initialized and trained separately for each task; if no episode succeeds, the base policy is retained.
+
+*In the overview figure, “Best-of-N” refers to weighted candidate aggregation. The verifier scores the first 10 steps, while the distillation target contains the complete 50-step plan.*
+
+### Main results
+Experiments on **40 LIBERO tasks** use a SmolVLA checkpoint trained for 5k steps, with 10 adaptation episodes per task and evaluation on 50 new episodes per task.
+
+| Policy | Mean success | LIBERO-Long |
+| --- | ---: | ---: |
+| Base, single candidate | 54.1% | 17.4% |
+| Base + eight-candidate aggregation (Agg-8) | 76.4% | 44.0% |
+| Distilled, single candidate | **70.6%** | **33.2%** |
+| Distilled + Agg-8 | **82.3%** | **57.8%** |
+
+Single-candidate distillation retains approximately **74% of the improvement** from Agg-8: (70.6 − 54.1) / (76.4 − 54.1). Reapplying aggregation to the distilled policy raises the mean success rate further, with a particularly large improvement on long-horizon tasks.
+
+![Per-task success rates before and after distillation, with single-candidate inference on the left and eight-candidate aggregation on the right](/images/verify-act-distill/scatter.png)
+
+*Each point represents one task; points above the diagonal improve after distillation. Single-candidate success improves on 34 of 40 tasks, ties on one, and decreases on five. With aggregation, 24 improve, six tie, and ten decrease.*
+
+### What makes distillation effective?
+Filtering for successful adaptation episodes matters: without this filter, mean success falls to 64.4% for single-candidate inference and 78.8% with aggregation. Distilling the base policy's own successful rollouts reaches 63.7% with a single candidate, compared with 70.6% when learning from verifier-aggregated plans.
+
+For the more thoroughly trained 10k checkpoint, single-candidate success also improves, from **83.2% to 86.2%**. On the common 140-task LIBERO-plus subset with distribution shifts, it increases from **20.7% to 24.5%**. Additional gains from reapplying aggregation are limited in these settings.
+
+### Qualitative example
+![Rollouts from the same initial state on LIBERO-Long task 9, comparing the base policy, Agg-8, and the distilled policy with Agg-8](/images/verify-act-distill/rollout-long-t9.png)
+
+*On this example, only the distilled policy with Agg-8 completes the task. Thin lines show candidate trajectories, thick lines show the executed weighted average, and rows show time progressing. This is an illustrative case selected as the first evaluation seed where the base policy fails and the distilled policy with Agg-8 succeeds.*
+
+### Scope and limitations
+The experiments use simulation, one VLA architecture, one training seed, and separate LoRA parameters per task. Adaptation requires successful episodes: 66 of the 140 LIBERO-plus tasks produced none within the adaptation budget and received no update. Some tasks regress after distillation, and stronger policies do not consistently benefit from applying aggregation again. Real-robot validation and safeguards against regressions remain future work.
+`,
+    imageUrl: '/images/verify-act-distill/overview.png',
+    tags: ['VLA', 'Test-Time Compute', 'Test-Time Adaptation', 'Distillation', 'LoRA', 'LIBERO'],
+  },
+
+  {
     slug: 'ihr-2026',
     category: 'project',
     date: '2026-09-19',

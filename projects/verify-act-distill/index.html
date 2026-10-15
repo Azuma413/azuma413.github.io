@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="gbOgzMa1wWrGbLrYAZq1SpwhBwtD-QqL5_ViY6jd5aI" />
+  <title>Verify, Act, Distill: Turning Test-Time Compute into Test-Time Adaptation for Vision-Language-Action Models | Kaneyoshi Hiratsuka</title>
+  <meta name="description" content="Distilling verifier-guided action aggregation into a VLA retains about 74% of the test-time compute gain in single-candidate inference and improves subsequent candidate aggregation." />
+  <meta name="keywords"
+    content="Kaneyoshi Hiratsuka, AI, Robotics, Machine Learning, Reinforcement Learning, Diffusion Models, PyTorch, ROS2, Research" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', '"Noto Sans JP"', 'sans-serif'],
+            serif: ['"Noto Serif JP"', 'Georgia', '"Times New Roman"', 'serif'],
+            heading: ['"Noto Serif JP"', 'Georgia', 'serif'],
+          },
+          colors: {
+            paper: '#fcfcfb',
+            ink: {
+              DEFAULT: '#1f2937',
+              light: '#475569',
+              muted: '#6b7280',
+              faint: '#94a3b8',
+            },
+            accent: {
+              DEFAULT: '#2f4a6b',
+              hover: '#22374f',
+              soft: '#eef2f7',
+            },
+            hair: '#e7e5e4',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --grid-line: rgba(31, 41, 55, 0.045);
+      --grid-size: 28px;
+    }
+
+    html {
+      background-color: #fcfcfb;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      color: #1f2937;
+      background-color: #fcfcfb;
+      overflow-x: hidden;
+      /* Faint notebook / graph-paper grid */
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: var(--grid-size) var(--grid-size);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Noto Serif JP', Georgia, serif;
+    }
+
+    ::selection {
+      background-color: #d6e0ec;
+    }
+
+    /* Light-theme prose for blog / detail pages */
+    .prose {
+      color: #374151;
+    }
+
+    .prose h1,
+    .prose h2,
+    .prose h3,
+    .prose h4,
+    .prose h5,
+    .prose h6 {
+      color: #1f2937;
+      font-family: 'Noto Serif JP', Georgia, serif;
+    }
+
+    .prose a {
+      color: #2f4a6b;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .prose a:hover {
+      color: #22374f;
+    }
+
+    .prose strong {
+      color: #1f2937;
+    }
+
+    .prose code {
+      color: #1f2937;
+      background-color: #f1f0ee;
+      padding: 0.2em 0.4em;
+      border-radius: 0.25rem;
+      font-size: 0.9em;
+    }
+
+    .prose pre {
+      background-color: #1f2937;
+      color: #f3f4f6;
+      padding: 1em;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .prose pre code {
+      color: #f3f4f6;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .prose blockquote {
+      color: #6b7280;
+      border-left-color: #cbd5e1;
+    }
+  </style>
+
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.23.1",
+    "react-markdown": "https://esm.sh/react-markdown@9.0.1",
+    "remark-gfm": "https://esm.sh/remark-gfm@4.0.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-x2xR2tLO.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BYZTj3zW.css">
+  <link rel="canonical" href="https://azuma413.github.io/projects/verify-act-distill/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Kaneyoshi Hiratsuka" />
+  <meta property="og:title" content="Verify, Act, Distill: Turning Test-Time Compute into Test-Time Adaptation for Vision-Language-Action Models | Kaneyoshi Hiratsuka" />
+  <meta property="og:description" content="Distilling verifier-guided action aggregation into a VLA retains about 74% of the test-time compute gain in single-candidate inference and improves subsequent candidate aggregation." />
+  <meta property="og:url" content="https://azuma413.github.io/projects/verify-act-distill/" />
+  <meta property="og:image" content="https://azuma413.github.io/images/verify-act-distill/overview.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Verify, Act, Distill: Turning Test-Time Compute into Test-Time Adaptation for Vision-Language-Action Models | Kaneyoshi Hiratsuka" />
+  <meta name="twitter:description" content="Distilling verifier-guided action aggregation into a VLA retains about 74% of the test-time compute gain in single-candidate inference and improves subsequent candidate aggregation." />
+  <meta name="twitter:image" content="https://azuma413.github.io/images/verify-act-distill/overview.png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","headline":"Verify, Act, Distill: Turning Test-Time Compute into Test-Time Adaptation for Vision-Language-Action Models","name":"Verify, Act, Distill: Turning Test-Time Compute into Test-Time Adaptation for Vision-Language-Action Models","description":"Distilling verifier-guided action aggregation into a VLA retains about 74% of the test-time compute gain in single-candidate inference and improves subsequent candidate aggregation.","keywords":"VLA, Test-Time Compute, Test-Time Adaptation, Distillation, LoRA, LIBERO","author":{"@type":"Person","name":"Kaneyoshi Hiratsuka"},"datePublished":"2026-10-10","url":"https://azuma413.github.io/projects/verify-act-distill/","publisher":{"@type":"Organization","name":"ArXiv"}}</script>
+</head>
+
+<body class="bg-paper text-ink">
+  <div id="root"><main style="max-width:48rem;margin:0 auto;padding:6rem 1.5rem;font-family:sans-serif"><p>Research · ArXiv · 2026-10-10</p><h1>Verify, Act, Distill: Turning Test-Time Compute into Test-Time Adaptation for Vision-Language-Action Models</h1><p>Distilling verifier-guided action aggregation into a VLA retains about 74% of the test-time compute gain in single-candidate inference and improves subsequent candidate aggregation.</p><div>Paper Kaneyoshi Hiratsuka, Satoshi Yamamori, Jun Morimoto — Kyoto University. Read the paper on arXiv · PDF Overview Test time compute can improve a vision language action (VLA) model by generating and evaluating multiple action candidates. When the policy stays frozen, however, this extra computation must be repeated at every execution. Verify, Act, Distill turns these execution decisions into training data for the VLA itself. A fixed verifier scores candidate action chunks, their weighted aggregate is executed, and successful adaptation episodes provide supervision for a small LoRA update. The resulting policy can retain the improvement with a single candidate and no verifier, or use candidate aggregation again for further gains. Method 1. Verify. Generate eight action chunks with a flow matching VLA (SmolVLA) and score them with a fixed action verifier. 2. Act. Convert the scores into softmax weights and execute the first 10 steps of the weighted aggregate. Store the observation and the full 50 step aggregated plan. 3. Distill. After collecting 10 adaptation episodes per task, keep the successful episodes and train only the action expert's LoRA parameters using the standard flow matching loss. The policy and verifier remain fixed during episode collection. Adaptation reuses the plans already computed for execution, without additional reinforcement learning or separate rollouts for teacher generation. LoRA parameters are initialized and trained separately for each task; if no episode succeeds, the base policy is retained. In the overview figure, “Best of N” refers to wei…</div><p>#VLA #Test-Time Compute #Test-Time Adaptation #Distillation #LoRA #LIBERO</p><p><a href="/">Kaneyoshi Hiratsuka</a></p></main></div>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="google-site-verification" content="gbOgzMa1wWrGbLrYAZq1SpwhBwtD-QqL5_ViY6jd5aI" />
+  <title>GatedVLA with Camera-Based Emergency Braking: AlpaSim E2E Closed Loop Challenge Technical Report | Kaneyoshi Hiratsuka</title>
+  <meta name="description" content="A driving VLA (Qwen-Drive-1.0-4B + flow-matching action expert) with a budgeted visual mask on the expert's cross-attention, plus camera-based emergency braking, for the NVIDIA AlpaSim E2E Closed Loop Challenge." />
+  <meta name="keywords"
+    content="Kaneyoshi Hiratsuka, AI, Robotics, Machine Learning, Reinforcement Learning, Diffusion Models, PyTorch, ROS2, Research" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', '"Noto Sans JP"', 'sans-serif'],
+            serif: ['"Noto Serif JP"', 'Georgia', '"Times New Roman"', 'serif'],
+            heading: ['"Noto Serif JP"', 'Georgia', 'serif'],
+          },
+          colors: {
+            paper: '#fcfcfb',
+            ink: {
+              DEFAULT: '#1f2937',
+              light: '#475569',
+              muted: '#6b7280',
+              faint: '#94a3b8',
+            },
+            accent: {
+              DEFAULT: '#2f4a6b',
+              hover: '#22374f',
+              soft: '#eef2f7',
+            },
+            hair: '#e7e5e4',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --grid-line: rgba(31, 41, 55, 0.045);
+      --grid-size: 28px;
+    }
+
+    html {
+      background-color: #fcfcfb;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      color: #1f2937;
+      background-color: #fcfcfb;
+      overflow-x: hidden;
+      /* Faint notebook / graph-paper grid */
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: var(--grid-size) var(--grid-size);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Noto Serif JP', Georgia, serif;
+    }
+
+    ::selection {
+      background-color: #d6e0ec;
+    }
+
+    /* Light-theme prose for blog / detail pages */
+    .prose {
+      color: #374151;
+    }
+
+    .prose h1,
+    .prose h2,
+    .prose h3,
+    .prose h4,
+    .prose h5,
+    .prose h6 {
+      color: #1f2937;
+      font-family: 'Noto Serif JP', Georgia, serif;
+    }
+
+    .prose a {
+      color: #2f4a6b;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .prose a:hover {
+      color: #22374f;
+    }
+
+    .prose strong {
+      color: #1f2937;
+    }
+
+    .prose code {
+      color: #1f2937;
+      background-color: #f1f0ee;
+      padding: 0.2em 0.4em;
+      border-radius: 0.25rem;
+      font-size: 0.9em;
+    }
+
+    .prose pre {
+      background-color: #1f2937;
+      color: #f3f4f6;
+      padding: 1em;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .prose pre code {
+      color: #f3f4f6;
+      background-color: transparent;
+      padding: 0;
+    }
+
+    .prose blockquote {
+      color: #6b7280;
+      border-left-color: #cbd5e1;
+    }
+  </style>
+
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.23.1",
+    "react-markdown": "https://esm.sh/react-markdown@9.0.1",
+    "remark-gfm": "https://esm.sh/remark-gfm@4.0.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-BonWOoCf.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BYZTj3zW.css">
+  <link rel="canonical" href="https://azuma413.github.io/projects/gatedvla/" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Kaneyoshi Hiratsuka" />
+  <meta property="og:title" content="GatedVLA with Camera-Based Emergency Braking: AlpaSim E2E Closed Loop Challenge Technical Report | Kaneyoshi Hiratsuka" />
+  <meta property="og:description" content="A driving VLA (Qwen-Drive-1.0-4B + flow-matching action expert) with a budgeted visual mask on the expert's cross-attention, plus camera-based emergency braking, for the NVIDIA AlpaSim E2E Closed Loop Challenge." />
+  <meta property="og:url" content="https://azuma413.github.io/projects/gatedvla/" />
+  <meta property="og:image" content="https://azuma413.github.io/images/gatedvla/system.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GatedVLA with Camera-Based Emergency Braking: AlpaSim E2E Closed Loop Challenge Technical Report | Kaneyoshi Hiratsuka" />
+  <meta name="twitter:description" content="A driving VLA (Qwen-Drive-1.0-4B + flow-matching action expert) with a budgeted visual mask on the expert's cross-attention, plus camera-based emergency braking, for the NVIDIA AlpaSim E2E Closed Loop Challenge." />
+  <meta name="twitter:image" content="https://azuma413.github.io/images/gatedvla/system.png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ScholarlyArticle","headline":"GatedVLA with Camera-Based Emergency Braking: AlpaSim E2E Closed Loop Challenge Technical Report","name":"GatedVLA with Camera-Based Emergency Braking: AlpaSim E2E Closed Loop Challenge Technical Report","description":"A driving VLA (Qwen-Drive-1.0-4B + flow-matching action expert) with a budgeted visual mask on the expert's cross-attention, plus camera-based emergency braking, for the NVIDIA AlpaSim E2E Closed Loop Challenge.","keywords":"Autonomous Driving, VLA, Flow Matching, Closed-Loop Evaluation, Emergency Braking, AlpaSim","author":{"@type":"Person","name":"Kaneyoshi Hiratsuka"},"datePublished":"2026-11","url":"https://azuma413.github.io/projects/gatedvla/","publisher":{"@type":"Organization","name":"AlpaSim Challenge"}}</script>
+</head>
+
+<body class="bg-paper text-ink">
+  <div id="root"><main style="max-width:48rem;margin:0 auto;padding:6rem 1.5rem;font-family:sans-serif"><p>Research · AlpaSim Challenge · 2026-11</p><h1>GatedVLA with Camera-Based Emergency Braking: AlpaSim E2E Closed Loop Challenge Technical Report</h1><p>A driving VLA (Qwen-Drive-1.0-4B + flow-matching action expert) with a budgeted visual mask on the expert's cross-attention, plus camera-based emergency braking, for the NVIDIA AlpaSim E2E Closed Loop Challenge.</p><div>Abstract This report presents GatedVLA , our entry (Team HogeHoge) for the Physical AI AV (PAI AV) track of the NVIDIA AlpaSim E2E Closed Loop Challenge. The learned vision language action (VLA) policy pairs the driving pretrained Qwen Drive 1.0 4B vision language model with a layer wise flow matching action expert that outputs a 2.5 s horizon of acceleration and curvature controls, augmented with a soft visual mask applied to the expert's cross attention. Compared with an identically trained baseline, the masked policy reaches comparable overall open loop error while reducing error on left turns. In local closed loop evaluation over the same 150 scenes (two rollouts per scene), the visual mask raises the mean scene score from 0.479 to 0.517. Adding a rule based automatic emergency braking (AEB) module at deployment raises it further to 0.599 and cuts the mean number of scenes with at fault collisions from 34.0 to 11.0. Method Policy — two front camera frames and a fixed prompt go into the VLM; a 32 block π₀ style Diffusion Transformer reads each VLM layer through cross attention and predicts 25 steps of [acceleration, curvature] conditioned on ego history and a route target point 25 m ahead. Budgeted visual mask — a gating head scores each image token; a bisection solved bias fixes the mean retention at 0.2 by construction, and is added to the expert's cross attention logits. The gate is trained by self distillation so that it keeps the tokens carrying navigation intent. Emergency braking — an RT DETRv2 detector, flat ground projection, and a corridor check along the plan…</div><p>#Autonomous Driving #VLA #Flow Matching #Closed-Loop Evaluation #Emergency Braking #AlpaSim</p><p><a href="/">Kaneyoshi Hiratsuka</a></p></main></div>
+</body>
+
+</html>

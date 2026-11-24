@@ -17,6 +17,26 @@ export const MAX_NEWS_ITEMS = 10;
 
 export const newsData = [
   {
+    date: '2026-11-14',
+    title: 'Attended the mid-term review meeting of the AIST "Kakusei" Project (覚醒プロジェクト 中間報告会).',
+    image: '/images/news/kakusei-midterm-2026.jpg',
+  },
+  {
+    date: '2026-11-10',
+    title: 'Attended CoRL 2026 and presented the S2A2 poster.',
+    image: '/images/news/corl2026.jpg',
+  },
+  {
+    date: '2026-11-07',
+    title: 'Joined GENIAC-PRIZE as a team leader.',
+    href: 'https://geniac-prize.nedo.go.jp/theme2/leader/',
+  },
+  {
+    date: '2026-10-31',
+    title: 'Competed in the NVIDIA AlpaSim E2E Closed Loop Challenge 2026 as Team HogeHoge.',
+    href: 'https://huggingface.co/spaces/nvidia/AlpasimE2EClosedLoopChallenge2026',
+  },
+  {
     date: '2026-09-19',
     title: 'Gave a talk at iHR 2026 on building a VLA evaluation platform at KUPAC.',
     href: 'https://www.i-homerobotics.org/activity/iHR15',

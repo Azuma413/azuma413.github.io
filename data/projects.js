@@ -142,6 +142,44 @@ This year's system achieved fully automated operation through teaching-based con
   },
 
   {
+    slug: 'gatedvla',
+    category: 'research',
+    date: '2026-11',
+    venue: 'AlpaSim Challenge',
+    title: 'GatedVLA with Camera-Based Emergency Braking: AlpaSim E2E Closed Loop Challenge Technical Report',
+    description:
+      'A driving VLA (Qwen-Drive-1.0-4B + flow-matching action expert) with a budgeted visual mask on the expert\'s cross-attention, plus camera-based emergency braking, for the NVIDIA AlpaSim E2E Closed Loop Challenge.',
+    // NOTE: /projects/gatedvla is rendered by components/GatedVLAPage.tsx (a dedicated
+    // paper-style page), not by the generic Markdown detail page. This
+    // longDescription is what the build-time SEO prerender indexes.
+    longDescription: `
+### Abstract
+This report presents **GatedVLA**, our entry (Team HogeHoge) for the Physical AI AV (PAI-AV) track of the NVIDIA AlpaSim E2E Closed Loop Challenge. The learned vision-language-action (VLA) policy pairs the driving-pretrained **Qwen-Drive-1.0-4B** vision-language model with a layer-wise **flow-matching action expert** that outputs a 2.5 s horizon of acceleration and curvature controls, augmented with a **soft visual mask** applied to the expert's cross-attention.
+
+Compared with an identically trained baseline, the masked policy reaches comparable overall open-loop error while reducing error on left turns. In local closed-loop evaluation over the same 150 scenes (two rollouts per scene), the visual mask raises the mean scene score from 0.479 to 0.517. Adding a rule-based **automatic emergency braking (AEB)** module at deployment raises it further to **0.599** and cuts the mean number of scenes with at-fault collisions from 34.0 to 11.0.
+
+### Method
+- **Policy** — two front-camera frames and a fixed prompt go into the VLM; a 32-block π₀-style Diffusion Transformer reads each VLM layer through cross-attention and predicts 25 steps of [acceleration, curvature] conditioned on ego history and a route target point 25 m ahead.
+- **Budgeted visual mask** — a gating head scores each image token; a bisection-solved bias fixes the mean retention at 0.2 by construction, and $\log m_p$ is added to the expert's cross-attention logits. The gate is trained by self-distillation so that it keeps the tokens carrying navigation intent.
+- **Emergency braking** — an RT-DETRv2 detector, flat-ground projection, and a corridor check along the planned path re-time the plan to slow down when the policy fails to brake.
+
+### Links
+- Paper / arXiv: [arXiv:2611.01663](https://arxiv.org/abs/2611.01663)
+- Code: [github.com/Azuma413/GatedVLA](https://github.com/Azuma413/GatedVLA)
+- Challenge: [AlpaSim E2E Closed Loop Challenge 2026](https://huggingface.co/spaces/nvidia/AlpasimE2EClosedLoopChallenge2026)
+`,
+    imageUrl: '/images/gatedvla/system.png',
+    tags: [
+      'Autonomous Driving',
+      'VLA',
+      'Flow Matching',
+      'Closed-Loop Evaluation',
+      'Emergency Braking',
+      'AlpaSim',
+    ],
+  },
+
+  {
     slug: 'rsj-2026-latent-world-model-vla',
     category: 'research',
     date: '2026-09',
